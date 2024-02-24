@@ -9,7 +9,7 @@
 
     <nav>
         <div class="tab-menu-block">
-        <img src="C:\Users\Admin\Desktop\CS-project\VanSeatReserve\src\views\img\Logo.png" class="logo-img">
+        <img src="../views/img/Logo.png" class="logo-img">
           <div class="nav-a">
           <a href="http://localhost:5173/">หน้าแรก</a>
           <a href="#">จองที่นั่ง</a>
