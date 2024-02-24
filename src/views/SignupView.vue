@@ -45,6 +45,14 @@
         </span>
       </div>
     </div>
+    <v-row>
+      <v-col cols="12" md="6">
+        <div>Column 1</div>
+      </v-col>
+      <v-col cols="12" md="6">
+        <div>Column 2</div>
+      </v-col>
+    </v-row>
 
 </template>
 
