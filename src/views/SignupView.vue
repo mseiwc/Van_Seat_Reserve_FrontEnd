@@ -47,9 +47,9 @@
           <div class="form-group">   
             <label for="dropdown">Role :&nbsp;</label>
             <select id="role-dropdown" v-model="selectRole" class="form-input">
-              <option value="option1">ผู้ใช้งาน</option>
-              <option value="option2">คนขับรถ</option>
-              <option value="option3">แอดมิน</option>
+              <option value="user">ผู้ใช้งาน</option>
+              <option value="driver">คนขับรถ</option>
+              <option value="admin">แอดมิน</option>
             </select>
           </div>
         </v-col>
@@ -68,6 +68,7 @@
 
 
 <script>
+import axios from 'axios'
     export default  {
       data() {
         return {
@@ -86,9 +87,41 @@
       // debug methods
       methods: {
         submitSignupForm () {
-          console.log(this.selectRole)
-          console.log("username:" + this.formData.username)
-        },
+          this.formData.role=this.selectRole
+          if (this.username==="") {
+            console.log('username เป็นช่องว่าง')
+          }
+          if (this.email==="") {
+            console.log('email เป็นช่องว่าง')
+          }
+          if (this.firstName==="") {
+            console.log('first name เป็นช่องว่าง')
+          }
+          if (this.lastName==="") {
+            console.log('last name เป็นช่องว่าง')
+          }
+          if (this.password1==="") {
+            console.log('password เป็นช่องว่าง')
+          }
+          if (this.password2==="") {
+            console.log('confirm password เป็นช่องว่าง')
+          }
+          if (this.selectRole==="") {
+            console.log('role เป็นช่องว่าง')
+          }
+          axios
+            .post('api/signup/', this.formData)
+            .then((response) => { 
+              if(response.data.message==='success'){
+
+              } else {
+                  console.error(response.data.message)
+              }
+            })
+            .catch((error)=>{
+              console.log('error', error)
+            })
+        }
       }
     }
 </script>

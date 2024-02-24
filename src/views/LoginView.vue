@@ -28,7 +28,7 @@
         <label for="fname">ชื่อผู้ใช้</label><br />
         <input type="text" placeholder="Enter your username" v-model="formData.username"><br />
         <label for="fname">รหัสผ่าน</label><br />
-        <input type="password" placeholder="Create a password" v-model="formData.password1"><br />
+        <input type="password" placeholder="Create a password" v-model="formData.password"><br />
         <button class="btn-signup">เข้าสู่ระบบ</button>
       </form>
       
@@ -38,22 +38,58 @@
 
 
 <script>
+// import user store
+import { useUserStore } from '@/stores/user'
+import axios from 'axios'
+
     export default  {
+      // จะใช้ user store ได้ต้อง setup ก่อน
+      setup() {
+        const userStore = useUserStore()
+        return {
+          userStore,
+        }
+      },
       data() {
         return {
           formData: {
             username: '',
-            password1: ''
+            password: ''
           }
         }
       },
 
       // debug methods
       methods: {
-        submitLoginForm () {
-          console.log("username:" + this.formData.username)
-          console.log("password:" + this.formData.password1)
-        },
+        async submitLoginForm () {
+          if (this.username==="") {
+            console.log('username เป็นช่องว่าง')
+          }
+          if (this.password==="") {
+            console.log('password เป็นช่องว่าง')
+          }
+          await axios
+            .post('api/login/', this.formData)
+            .then((response) => { 
+              this.userStore.setToken(response.data)
+              axios.defaults.headers.common['Authorization'] =
+              'Bearer ' + response.data.access
+          
+            })
+            .catch((error)=>{
+              console.log('error', error)
+            })
+            await axios
+              .get('/api/me/')
+              .then((response) => {
+                this.userStore.setUserInfo(response.data)
+                // console.log(localStorage.getItem('user.fname'))
+                this.$router.push('/home')
+              })
+              .catch((error) => {
+                console.log('error', error)
+              })
+        }
       }
       
     }
