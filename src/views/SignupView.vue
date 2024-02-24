@@ -2,35 +2,59 @@
   <!--Tab menu-->
   <div class="flex justify-between items-center" style="background-color: #4EA7DB;">
     <img src="../views/img/Logo.png" class="logo-img">
-    <div class="header-top-right">
-      <a href="http://localhost:5173/signup" class="btn btn-primary mr-4">สร้างบัญชีผู้ใช้</a>
-      <a href="http://localhost:5173/login" class="btn btn-secondary">เข้าสู่ระบบ</a>
+    <div class="header-top-right" style="padding: 1%;">
+      <a href="http://localhost:5173/signup" class="btn btn-primary mr-4" style="color: white;">สร้างบัญชีผู้ใช้</a>
+      <a href="http://localhost:5173/login" class="btn btn-secondary" style="color: white;">เข้าสู่ระบบ</a>
     </div>
   </div>
   <!--Tab menu-->
 
   <title>Signup Form</title>
-  <div class="signup-form">
-    <h3>ลงทะเบียนผู้ใช้</h3>
+  <div class="signup-form" style="text-align: left;">
+    <h3 style="margin: 2% 4%;">ลงทะเบียนผู้ใช้</h3>
     <form action="#" @submit.prevent="submitSignupForm">
-      <label for="fname">ชื่อผู้ใช้</label><br />
-      <input type="text" placeholder="Enter your username" v-model="formData.username"><br />
-      <label for="fname">อีเมล</label><br />
-      <input type="text" placeholder="Enter your email" v-model="formData.email"><br />
-      <label for="fname">ชื่อ</label><br />
-      <input type="text" placeholder="Enter your first name" v-model="formData.firstName"><br />
-      <label for="fname">นามสกุล</label><br />
-      <input type="text" placeholder="Enter your last name" v-model="formData.lastName"><br />
-      <label for="fname">รหัสผ่าน</label><br />
-      <input type="password" placeholder="Create a password" v-model="formData.password1"><br />
-      <label for="fname">ยืนยันรหัสผ่าน</label><br />
-      <input type="password" placeholder="Confirm your password" v-model="formData.password2"><br />
-      <label for="dropdown">Role :&nbsp;</label>
-      <select id="role-dropdown" v-model="selectRole">
-        <option value="option1">ผู้ใช้งาน</option>
-        <option value="option2">คนขับรถ</option>
-        <option value="option3">แอดมิน</option>
-      </select><br />
+      
+    <v-container>
+      <v-row>
+        <v-col cols="12" md="6">
+          <div class="form-group">  
+            <label for="fname">ชื่อผู้ใช้</label>
+            <input type="text" v-model="formData.username" class="form-input"><br />
+          </div>
+          <div class="form-group"> 
+            <label for="fname">อีเมล</label>
+            <input type="text" v-model="formData.email" class="form-input"><br />
+          </div>
+          <div class="form-group"> 
+            <label for="fname">ชื่อ</label>
+            <input type="text" v-model="formData.firstName" class="form-input"><br />
+          </div>
+          <div class="form-group"> 
+            <label for="fname">นามสกุล</label>
+            <input type="text" v-model="formData.lastName" class="form-input">
+          </div>
+        </v-col>
+
+        <v-col cols="12" md="6">  
+          <div class="form-group">        
+            <label for="fname">รหัสผ่าน</label>
+            <input type="password" v-model="formData.password1" class="form-input"><br />
+          </div>
+          <div class="form-group">   
+            <label for="fname">ยืนยันรหัสผ่าน</label>
+            <input type="password" v-model="formData.password2" class="form-input"><br />
+          </div>
+          <div class="form-group">   
+            <label for="dropdown">Role :&nbsp;</label>
+            <select id="role-dropdown" v-model="selectRole" class="form-input">
+              <option value="option1">ผู้ใช้งาน</option>
+              <option value="option2">คนขับรถ</option>
+              <option value="option3">แอดมิน</option>
+            </select>
+          </div>
+        </v-col>
+      </v-row>
+    </v-container>
       <button class="btn-signup">ลงทะเบียน</button>
     </form>
 
@@ -108,6 +132,19 @@ nav a {
 .signup-form input, select#role-dropdown:hover {
     border: 1px solid #aaa;
 }
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 16px; /* Adjust the value as needed for your desired spacing */
+}
+
+.form-label {
+  margin-bottom: 8px; /* Adjust the value as needed for your desired spacing */
+}
+
+.form-input {
+  width: 60%; /* Ensure inputs take full width */
+}
 .btn-signup {
     border-radius: 50px;
     border-style: none;
@@ -119,4 +156,6 @@ nav a {
 }
 
 /* \signup form */
+
+
 </style>
