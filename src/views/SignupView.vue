@@ -1,14 +1,14 @@
 <template>
   <!--Tab menu-->
-  <div class="flex justify-between items-center" style="background-color: #4EA7DB;">
+  <div class="tab-menu" style="background-color: #4EA7DB;display: grid; grid-template-columns: 3fr 10fr;align-items: center;justify-items: end;margin-left;: 3%">
     <img src="../views/img/Logo.png" class="logo-img">
-    <div class="header-top-right" style="padding: 1%;">
+    <div class="tab-menu-block" style="padding: 1%;">
       <a href="http://localhost:5173/signup" class="btn btn-primary mr-4" style="color: white;">สร้างบัญชีผู้ใช้</a>
       <a href="http://localhost:5173/login" class="btn btn-secondary" style="color: white;">เข้าสู่ระบบ</a>
     </div>
   </div>
   <!--Tab menu-->
-
+  <div class="padding-pd"></div>
   <title>Signup Form</title>
   <div class="signup-form" style="text-align: left;">
     <h3 style="margin: 2% 4%;">ลงทะเบียนผู้ใช้</h3>
@@ -64,6 +64,7 @@
       </span>
     </div>
   </div>
+  <div class="padding-pd"></div>
 </template>
 
 
@@ -127,28 +128,47 @@ import axios from 'axios'
 </script>
 
 <style>
-.tab-menu-block {
-    align-items: center;
+.padding-pd{
+  padding: 2%;
+}
+.menu-align {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+.menu-align h3 {
+  font-weight: bold;
+  font-size: 26px;
+  margin: 0% 1%;
+}
+.menu-align2 {
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+  flex-direction: column;
+}
+.menu-align2 h3 {
+  font-weight: bold;
+  font-size: 26px;
+  margin: 0% 1%;
+}
+.menu-align2 h4 {
+  font-size: 18px;
+  margin: 0% 1%;
+}
+
+/* Tab Menu */
+.tab-menu {
+    padding: 1%;
+    font-size: 22px;
 }
 .logo-img {
-    width: 20%;
+    width: 100%;
     margin: 1% 0%;
 }
-nav {
-    text-align: center;
-    margin: 4% 0%;
-    background-color: #4EA7DB;
-}
-nav a {
-    margin: 0% 2%;
-    color: white;
-    font-size: 20px;
-}
-.nav-a {
-    width: 100%;
-    margin-right: 20%;
-}
-/* signup form */
+/* \Tab Menu */
+
+/* Signup Form */
 .signup-form h3 {
     font-weight: bold;
     font-size: 26px;
@@ -156,13 +176,13 @@ nav a {
 }
 .signup-form input, select#role-dropdown {
     text-align: center;
-    border-radius: 10px;
+    border-radius: 50px;
     border: 1px solid #eee;
     padding: 10px;
     margin: 10px 0%;
     transition: .3s border-color;
 }
-.signup-form input, select#role-dropdown:hover {
+.signup-form input:hover, select#role-dropdown:hover {
     border: 1px solid #aaa;
 }
 .form-group {
@@ -185,10 +205,213 @@ nav a {
     box-sizing: border-box;
     color: #3c4043;
     padding: 1%;
-    margin: 2% 0%;
+    margin: 2% 3%;
+    width: 8%;
 }
+.signup {
+    margin-left: 2%;
+}
+.btn-login {
+    color: #4ea7db;
+}
+/* \Signup Form */
 
-/* \signup form */
+/* Login Form */
+.login-form {
+    text-align: center;
+}
+.login-form h3 {
+    font-weight: bold;
+    font-size: 26px;
+    margin: 1% 0%;
+}
+.login-form input:hover {
+    border: 1px solid #aaa;
+}
+.login-form input {
+    text-align: center;
+    border-radius: 50px;
+    border: 1px solid #eee;
+    padding: 10px;
+    margin: 10px 0%;
+    transition: .3s border-color;
+}
+/* \Login Form */
 
+/* Home */
+/* Profile */
+.btn-profile {
+    background-color: transparent;
+    border: 2px solid;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-left: auto; 
+}
+.btn, .btn-profile {
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    margin-right: 10px;
+}
+.btn-profile svg {
+    fill: currentColor;
+    width: 20px; 
+    height: auto;
+}
+/* \Profile */
 
+/* ช่อง Search */
+.search-img {
+  width: 4%;
+  margin: 1% 0%;
+}
+.select-route-input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 2%;
+}
+.select-route-input h3 {
+  font-weight: bold;
+  font-size: 26px;
+  margin: 1% 0%;
+  flex: 100%; /* ให้รวมในบรรทัดเดียวกัน */
+}
+select#route-dropdown,
+.select-route-input input,
+.btn-select {
+  text-align: center;
+  border-radius: 50px;
+  border: 1px solid #eee;
+  padding: 10px;
+  margin: 10px;
+  transition: .3s border-color;
+  flex: 0 0 calc(20% - 20px);
+}
+select#route-dropdown:hover,
+.select-route-input input:hover {
+  border: 1px solid #aaa;
+}
+.btn-select {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #0965A7;
+  padding: 13px;
+  width: calc(10% - 20px);
+}
+/* \ช่อง Search */
+
+/* ตาราง */
+#UserTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin: auto;
+}
+#UserTable th, #UserTable td {
+  border: 1px solid #4ea7db;
+  padding: 25px;
+  text-align: center;
+}
+#UserTable tbody tr:hover {
+  background-color: #e5e5e5;
+}
+/* \ตาราง */
+/* \Home */
+
+/* Add Route */
+.route-form {
+  max-width: 400px; /* ปรับขนาดฟอร์มตามที่คุณต้องการ */
+  margin: auto; /* ทำให้ฟอร์มอยู่ตรงกลางหน้าจอ */
+  padding: 2% 0% 2% 0%;
+}
+.route-input {
+  width: 100%;
+  padding: 8px;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+}
+.route-form label {
+  font-weight: bold;
+  
+}
+.route-form input {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 10px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+}
+/* \Add Route */
+
+/* Payment */
+/* ปุ่มย้อนกลับ-ยืนยัน */
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+.btn-confirm {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #0965A7;
+  padding: 13px;
+  width: calc(10% - 20px);
+  margin-right: 10%;
+}
+.btn-back {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #BABABA;
+  padding: 13px;
+  width: calc(10% - 20px);
+  margin-left: 10%;
+}
+/* \ปุ่มย้อนกลับ-ยืนยัน */
+
+.btn-addroute {
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #0965A7;
+    padding: 13px;
+    width: calc(10% - 20px);
+    margin: 3% 0% 0% 90%;
+}
+/* \Payment */
+
+/* Reserve */
+.reserve {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+}
+.reserve-input, #reserveInput {
+  padding: 10px;
+  width: 20%;
+  text-align: center;
+  margin-bottom: 1%;
+  border-radius: 50px;
+  border: 1px solid #eee;
+  transition: .3s border-color;
+}
+.reserve-input:hover, #reserveInput:hover {
+  border: 1px solid #aaa;
+}
+/* \Reserve */
 </style>
