@@ -77,6 +77,54 @@
   
   
 <script>
+export default {
+  mounted() {
+    this.fetchFilteredSearches();
+  },
+
+  data() {
+    return {
+      filteredRequests: [], // เปลี่ยนชื่อเป็น filteredRequests
+    };
+  },
+
+  computed: {
+    filteredSearches() {
+      return this.filteredRequests.filter(request => {
+        const matchesStartRoute = request.startRoute === this.selectedStartRoute; 
+        const matchesEndRoute = request.endRoute === this.selectedEndRoute; 
+        const matchesDate = request.date === this.selectedDate;
+        return matchesStartRoute && matchesEndRoute && matchesDate;
+      });
+    }
+  },
+
+  methods: {
+    async fetchFilteredSearches() {
+      await this.getUserLogin(); // ให้แก้ไขเป็นการเรียกใช้ getUserLogin() ตามที่คุณมี
+      console.log('username: ' + this.username); // ตรวจสอบค่า username
+      try {
+        if (this.username) {
+          // ตรวจสอบว่ามีค่า username หรือไม่
+          const response = await axios.get(`/leaveDetail/?username=${this.username}`);
+          this.filteredRequests = response.data;
+          // ตรวจสอบว่ามีฟังก์ชัน getUniqueRoutes() หรือไม่และใช้งานตามความเหมาะสม
+          // ในที่นี้จะให้แสดงตัวอย่างการใช้งานเพื่อความเข้าใจ
+          // this.filteredRequests = this.getUniqueRoutes(response.data);
+        } else {
+          console.log("Doesn't have username:  " + this.username);
+        }
+      } catch (error) {
+        console.error('There was an error fetching the leave requests:', error);
+      } finally {
+        
+      }
+    },
+  }
+};
+
+
+
 
     // ฟังก์ชันกรองตาราง
     /*function filterTable() {

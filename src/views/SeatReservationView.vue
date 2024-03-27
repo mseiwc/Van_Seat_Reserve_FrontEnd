@@ -20,68 +20,48 @@
       <!--Tab menu-->
       <div class="padding-pd"></div>
     
-       <!--for loop-->
-        <!--<div class="" v-for="(reserve, index) in reserve" :key="index">
-          No.: {{ reserve.no }}
-          Route: {{ reserve.route }}
-          Time: {{ reserve.time }}
-          Status: {{ reserve.status }}
-          Price: {{ reserve.price }}
-        </div>-->
   
-      <div class="seat-reserve">
-        <table>
-          <thead>
-            <tr>
-              <th>เลขที่รถ</th>
-              <th>ต้นทาง</th>
-              <th>ปลายทาง</th>
-              <th>เวลา</th>
-              <th>สถานะ</th>
-              <th>ราคา</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr v-for="(search, index) in filteredSearches" :key="search.id">
-              <td>{{ search.carNumber }}</td>
-              <td>{{ search.startRoute }}</td>
-              <td>{{ search.endRoute }}</td>
-              <td>{{ search.time }}</td>
-              <td>{{ search.status }}</td> <!--ยังไม่มีตัวแปร status-->
-              <td>{{ search.price }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="menu-align">
+        <img src="../views/img/search.png" class="search-img">
+        <h3>ค้นหาตารางการเดินทาง</h3>
       </div>
+      
+      <div class="reserve">
+        <select id="reserve-line-dropdown" v-model="selectReserve" class="reserve-input">
+          <option value="" selected disabled>เลือกต้นทาง</option>
+          <option value="bangkok">กรุงเทพ</option>
+          <option value="pattaya">พัทยา</option>
+          <option value="khonkaen">ขอนแก่น</option>
+          <option value="ubonratchathani">อุบลราชธานี</option>
+          <option value="chiangmai">เชียงใหม่</option>
+        </select>
+        <select id="reserve-line-dropdown" v-model="selectReserve" class="reserve-input">
+          <option value="" selected disabled>เลือกปลายทาง</option>
+          <option value="bangkok">กรุงเทพ</option>
+          <option value="pattaya">พัทยา</option>
+          <option value="khonkaen">ขอนแก่น</option>
+          <option value="ubonratchathani">อุบลราชธานี</option>
+          <option value="chiangmai">เชียงใหม่</option>
+        </select>
+        <input type="date" id="reserveInput" placeholder="วันที่เดินทาง">
+        <button class="btn-select">ค้นหาเส้นทาง</button>
+      </div>
+  
       
       
   
       <div class="padding-pd"></div>
-    </body>
+  </body>
   
-  </template>
+</template>
     
     
 <script>
-    export default {
-    data() {
-      return {
-        items: [
-          { carNumber: 1, startRoute: 'Route 1', endRoute: 'Route 3', time: '10:00 AM', status: 'On Time', price: '$10' },
-          { carNumber: 2, startRoute: 'Route 2', endRoute: 'Route 3', time: '11:00 AM', status: 'Delayed', price: '$12' },
-          { carNumber: 3, startRoute: 'Route 3', endRoute: 'Route 3', time: '12:00 PM', status: 'On Time', price: '$15' },
-          // เพิ่มข้อมูลเพิ่มเติมตามต้องการ
-        ],
-        filteredSearches: []
-      };
-    }
-  };
-  </script>
-    
-    
-    
-  <style>
   
-  </style>
+</script>
     
+    
+    
+<style>
+  
+</style>

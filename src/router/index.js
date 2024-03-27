@@ -4,6 +4,7 @@ import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
 import HomeUserView from '../views/HomeUserView.vue'
 import RouteSelectionView from '../views/RouteSelectionView.vue'
+import SeatSelectionView from '../views/SeatSelectionView.vue'
 import SeatReservationView from '../views/SeatReservationView.vue'
 import PaymentView from '../views/PaymentView.vue'
 import CheckPaymentView from '../views/CheckPaymentView.vue'
@@ -12,6 +13,7 @@ import HomeAdminView from '../views/HomeAdminView.vue'
 import AddRouteView from '../views/AddRouteView.vue'
 
 import HomeDriverView from '../views/HomeDriverView.vue'
+
 
 
 
@@ -49,9 +51,14 @@ const router = createRouter({
       component: HomeDriverView
     },
     {
-      path: '/route/selection',
-      name: 'route/selection',
+      path: '/selection/route',
+      name: 'selection/route',
       component: RouteSelectionView
+    },
+    {
+      path: '/selection/seat',
+      name: 'selection/seat',
+      component: SeatSelectionView
     },
     {
       path: '/reserve',
@@ -65,12 +72,12 @@ const router = createRouter({
     },
     {
       path: '/checkpayment',
-      name: 'CheckPayment',
+      name: 'checkPayment',
       component: CheckPaymentView
     },
     {
       path: '/addroute',
-      name: 'AddRoute',
+      name: 'addRoute',
       component: AddRouteView
     }
   ]
