@@ -76,7 +76,8 @@ import axios from 'axios'
               .get('/api/me/')
               .then((response) => {
                 this.userStore.setUserInfo(response.data)
-                // console.log(localStorage.getItem('user.fname'))
+                console.log(response.data)
+                console.log(localStorage.getItem('user.fname'))
                 this.$router.push('/home')
               })
               .catch((error) => {
