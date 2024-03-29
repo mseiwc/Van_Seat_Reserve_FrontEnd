@@ -87,6 +87,16 @@ import axios from 'axios'
       },
       // debug methods
       methods: {
+        clearInput() {
+          this.formData.username = ''
+          this.formData.firstName = ''
+          this.formData.lastName = ''
+          this.formData.email = ''
+          this.formData.password1 = ''
+          this.formData.password2 = ''
+          this.formData.role = ''
+          this.selectRole = ''
+        },
         submitSignupForm () {
           this.formData.role=this.selectRole
           if (this.username==="") {
@@ -114,7 +124,7 @@ import axios from 'axios'
             .post('api/signup/', this.formData)
             .then((response) => { 
               if(response.data.message==='success'){
-
+                this.clearInput();
               } else {
                   console.error(response.data.message)
               }
@@ -122,7 +132,9 @@ import axios from 'axios'
             .catch((error)=>{
               console.log('error', error)
             })
-        }
+        },
+        
+        
       }
     }
 </script>

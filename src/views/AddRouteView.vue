@@ -27,21 +27,13 @@
     <div class="route-form">
       <form action="#" @submit.prevent="submitRouteForm">
         <label for="dropdown">ต้นทาง :&nbsp;</label>
-        <select id="route-dropdown" v-model="selectStartRoute" class="route-input">
-          <option value="bangkok">กรุงเทพ</option>
-          <option value="pattaya">พัทยา</option>
-          <option value="khonkaen">ขอนแก่น</option>
-          <option value="ubonratchathani">อุบลราชธานี</option>
-          <option value="chiangmai">เชียงใหม่</option>
+        <select id="route-dropdown" v-model="routeData.startRoute" class="route-input">
+          <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select><br />
 
         <label for="dropdown">ปลายทาง :&nbsp;</label>
-        <select id="route-dropdown" v-model="selectEndRoute" class="route-input">
-          <option value="bangkok">กรุงเทพ</option>
-          <option value="pattaya">พัทยา</option>
-          <option value="khonkaen">ขอนแก่น</option>
-          <option value="ubonratchathani">อุบลราชธานี</option>
-          <option value="chiangmai">เชียงใหม่</option>
+        <select id="route-dropdown" v-model="routeData.endRoute" class="route-input">
+          <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select><br />
       <!--แก้วันที่ เวลา-->
         <label for="fname" >วันที่</label><br />
@@ -55,13 +47,9 @@
       <!--แก้ชื่อคนขับ -> ดึงชื่อมาจาก data base-->
         <label for="dropdown">ชื่อคนขับ :&nbsp;</label>
         <select id="route-dropdown" v-model="selectDriver" class="route-input">
-          <option value="d0001">d0001</option>
-          <option value="d0002">d0002</option>
+          <option v-for="item in routes" :value="item.id" :key="item">{{ item.name }}</option>
         </select><br />
 
-      <!--แก้เลขที่รถ -> gen โดยระบบ-->
-        <label for="fname">เลขที่รถ</label><br />
-        <input type="text" v-model="routeData.carNumber" placeholder="" ><br />
       </form>
     </div>
     
@@ -91,11 +79,27 @@ import axios from 'axios'
           },
           selectStartRoute: '',
           selectEndRoute: '',
-          selectDriver: ''
+          selectDriver: '',
+          routes: []
         }
+      },
+      async mounted() {
+        await this.fetchRoutes()
       },
       // debug methods
       methods: {
+        async fetchRoutes(){
+          await axios.get('/routes/').then(
+            response => {
+              console.log(response.data)
+              this.routes = response.data
+
+            }
+          ).catch(error => {
+          })
+
+        },
+
         submitRouteForm () {
           this.routeData.startRoute=this.selectStartRoute
           this.routeData.endRoute=this.selectEndRoute

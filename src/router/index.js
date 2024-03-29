@@ -90,6 +90,12 @@ const router = createRouter({
       name: 'paymentlist',
       component: () => import('../views/PaymentListView.vue')
     }
+    ,
+    {
+      path: '/addcar',
+      name: 'addcar',
+      component: () => import('../views/AddCarView.vue')
+    }
   ]
 })
 
