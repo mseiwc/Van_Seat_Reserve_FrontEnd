@@ -43,13 +43,13 @@
           </thead>
 
           <tbody>
-            <tr v-for="(seatReservation, index) in seatReservations" :key="seatReservation.carNumber">
-              <td>{{ seatReservation.carNumber }}</td>
-              <td>{{ seatReservation.startRoute }}</td>
-              <td>{{ seatReservation.endRoute }}</td>
-              <td>{{ seatReservation.time }}</td>
-              <td>{{ seatReservation.status }}</td> <!--ยังไม่มีตัวแปร status-->
-              <td>{{ seatReservation.price }}</td>
+            <tr v-for="item in seatReservation" :value="item" :key="item">
+              <td>{{ item }}</td>
+              <td>{{ item }}</td>
+              <td>{{ item }}</td>
+              <td>{{ item }}</td>
+              <td>{{ item }}</td> <!--ยังไม่มีตัวแปร status-->
+              <td>{{ item }}</td>
             </tr>
           </tbody>
         </table>
@@ -67,13 +67,24 @@
   export default {
     data() {
       return {
-        seatReservations: [
-          { carNumber: 1, startRoute: 'Route 1', endRoute: 'Route 3', time: '10:00 AM', status: 'On Time', price: '$10' },
-          { carNumber: 2, startRoute: 'Route 2', endRoute: 'Route 3', time: '11:00 AM', status: 'Delayed', price: '$12' },
-          { carNumber: 3, startRoute: 'Route 3', endRoute: 'Route 3', time: '12:00 PM', status: 'On Time', price: '$15' },
-          // เพิ่มข้อมูลเพิ่มเติมตามต้องการ
-        ],
+        seatReservation: []
       };
+    },
+    async mounted() {
+        await this.fetchSeatReservation()
+      },
+    methods: {
+      async fetchSeatReservation(){
+        await axios.get('/addroutes/').then(
+          response => {
+            console.log(response.data)
+            this.seatReservation = response.data
+
+          }
+        ).catch(error => {
+        })
+
+      },
     }
   };
   </script>
