@@ -11,7 +11,7 @@
   <div class="padding-pd"></div>
   <title>Signup Form</title>
   <div class="signup-form" style="text-align: left;">
-    <h3 style="margin: 2% 4%;">ลงทะเบียนผู้ใช้</h3>
+    <h3 style="margin: 2% 4%;">สร้างบัญชีผู้ใช้</h3>
     <form action="#" @submit.prevent="submitSignupForm">
       
     <v-container>
@@ -45,17 +45,17 @@
             <input type="password" v-model="formData.password2" class="form-input"><br />
           </div>
           <div class="form-group">   
-            <label for="dropdown">Role :&nbsp;</label>
+            <label for="dropdown">บทบาท :&nbsp;</label>
             <select id="role-dropdown" v-model="selectRole" class="form-input">
               <option value="user">ผู้ใช้งาน</option>
               <option value="driver">คนขับรถ</option>
-              <option value="admin">แอดมิน</option>
+              <option value="admin">ผู้ดูแลระบบ</option>
             </select>
           </div>
         </v-col>
       </v-row>
     </v-container>
-      <button class="btn-signup">ลงทะเบียน</button>
+      <button class="btn-signup">สร้างบัญชี</button>
     </form>
 
     <div class="signup">
@@ -320,7 +320,7 @@ select#route-dropdown:hover,
 
 /* ตาราง */
 #UserTable {
-  width: 100%;
+  width: 85%;
   border-collapse: collapse;
   margin: auto;
 }
@@ -335,13 +335,13 @@ select#route-dropdown:hover,
 /* \ตาราง */
 /* \Home */
 
-/* Add Route */
-.route-form {
+/* Add Route + Add Car */
+.route-form, .car-form {
   max-width: 400px; /* ปรับขนาดฟอร์มตามที่คุณต้องการ */
   margin: auto; /* ทำให้ฟอร์มอยู่ตรงกลางหน้าจอ */
   padding: 2% 0% 2% 0%;
 }
-.route-input {
+.route-input, .car-input {
   width: 100%;
   padding: 8px;
   margin: 10px;
@@ -349,11 +349,11 @@ select#route-dropdown:hover,
   border: 1px solid #ccc;
   border-radius: 50px;
 }
-.route-form label {
+.route-form label, .car-form label {
   font-weight: bold;
   
 }
-.route-form input {
+.route-form input, .car-form input {
   width: 100%;
   padding: 12px 20px;
   margin: 10px;

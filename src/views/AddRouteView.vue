@@ -5,9 +5,8 @@
     <div class="tab-menu" style="background-color: #4EA7DB;display: grid; grid-template-columns: 3fr 10fr 3fr;align-items: center;">
       <img src="../views/img/Logo.png" class="logo-img">
       <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
-        <a href="" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
-        <a href="" class="btn btn-primary mr-4" style="color: white;">ตารางการเดินรถ</a>
-        <a href="" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
+        <a href="http://localhost:5173/home/admin" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
+        <a href="http://localhost:5173/checkpayment" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
       <button class="btn-profile">
       <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +34,7 @@
         <select id="route-dropdown" v-model="routeData.endRoute" class="route-input">
           <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select><br />
-      <!--แก้วันที่ เวลา-->
+
         <label for="fname" >วันที่</label><br />
         <input type="date" v-model="routeData.date" placeholder="" ><br />
         <label for="fname">เวลา</label><br />
@@ -44,19 +43,19 @@
         <label for="fname">ราคา</label><br />
         <input type="number" v-model="routeData.price" placeholder="" ><br />
 
-      <!--แก้ชื่อคนขับ -> ดึงชื่อมาจาก data base-->
         <label for="dropdown">ชื่อคนขับ :&nbsp;</label>
-        <select id="route-dropdown" v-model="selectDriver" class="route-input">
-          <option v-for="item in routes" :value="item.id" :key="item">{{ item.name }}</option>
+        <select id="route-dropdown" v-model="routeData.car" class="route-input">
+          <option v-for="item in cars" :value="item.id" :key="item">{{ item.driver_id.firstName }} {{ item.driver_id.lastName }}</option>
         </select><br />
 
+        <div class="button-container">
+          <button class="btn-back"><router-link to="/home/admin">ย้อนกลับ</router-link></button>
+          <button class="btn-confirm">ยืนยัน</button>
+        </div>
       </form>
     </div>
     
-    <div class="button-container">
-      <button class="btn-back">ย้อนกลับ</button>
-      <button class="btn-confirm">ยืนยัน</button>
-    </div>
+    
 
     <div class="padding-pd"></div>
   </body>
@@ -74,17 +73,19 @@ import axios from 'axios'
             date: '',
             time: '',
             price: '',
-            driver: '',
+            car: '',
             carNumber: '',
           },
           selectStartRoute: '',
           selectEndRoute: '',
           selectDriver: '',
-          routes: []
+          routes: [],
+          cars: []
         }
       },
       async mounted() {
         await this.fetchRoutes()
+        await this.fetchCars()
       },
       // debug methods
       methods: {
@@ -93,6 +94,18 @@ import axios from 'axios'
             response => {
               console.log(response.data)
               this.routes = response.data
+              
+            }
+          ).catch(error => {
+          })
+
+        },
+
+        async fetchCars(){
+          await axios.get('/cars/').then(
+            response => {
+              console.log(response.data)
+              this.cars = response.data
 
             }
           ).catch(error => {
@@ -101,9 +114,7 @@ import axios from 'axios'
         },
 
         submitRouteForm () {
-          this.routeData.startRoute=this.selectStartRoute
-          this.routeData.endRoute=this.selectEndRoute
-          this.routeData.driver=this.selectDriver
+
           if (this.selectStartRoute==="") {
             console.log('start route เป็นช่องว่าง')
           }
@@ -126,7 +137,7 @@ import axios from 'axios'
             console.log('car number เป็นช่องว่าง')
           }
           axios
-            .post('api/signup/', this.routeData)
+            .post('/addroutes/', this.routeData)
             .then((response) => { 
               if(response.data.message==='success'){
 

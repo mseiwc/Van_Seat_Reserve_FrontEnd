@@ -7,7 +7,7 @@
         <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
           <a href="http://localhost:5173/home/user" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
           <a href="http://localhost:5173/reserve" class="btn btn-primary mr-4" style="color: white;">จองที่นั่ง</a>
-          <a href="http://localhost:5173/payment" class="btn btn-primary mr-4" style="color: white;">ชำระเงิน</a>
+          <a href="http://localhost:5173/paymentlist" class="btn btn-primary mr-4" style="color: white;">ชำระเงิน</a>
           <a href="http://localhost:5173/checkpayment" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
         </div>
         <button class="btn-profile">
@@ -26,25 +26,47 @@
         <h3>ค้นหาตารางการเดินทาง</h3>
       </div>
       
-      <div class="reserve">
-        <select id="reserve-line-dropdown" v-model="selectReserve" class="reserve-input">
-          <option value="" selected disabled>เลือกต้นทาง</option>
-          <option value="bangkok">กรุงเทพ</option>
-          <option value="pattaya">พัทยา</option>
-          <option value="khonkaen">ขอนแก่น</option>
-          <option value="ubonratchathani">อุบลราชธานี</option>
-          <option value="chiangmai">เชียงใหม่</option>
+      <div class="reserve-form">
+        <form action="#" @submit.prevent="submitRouteForm">
+
+        <label for="dropdown">ต้นทาง :&nbsp;</label>
+        <select id="reserve-dropdown" v-model="routeData.startRoute" class="reserve-input">
+          <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
-        <select id="reserve-line-dropdown" v-model="selectReserve" class="reserve-input">
-          <option value="" selected disabled>เลือกปลายทาง</option>
-          <option value="bangkok">กรุงเทพ</option>
-          <option value="pattaya">พัทยา</option>
-          <option value="khonkaen">ขอนแก่น</option>
-          <option value="ubonratchathani">อุบลราชธานี</option>
-          <option value="chiangmai">เชียงใหม่</option>
+        <label for="dropdown">ปลายทาง :&nbsp;</label>
+        <select id="reserve-dropdown" v-model="routeData.endRoute" class="reserve-input">
+          <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
-        <input type="date" id="reserveInput" placeholder="วันที่เดินทาง">
-        <button class="btn-select">ค้นหาเส้นทาง</button>
+        <label for="fname" >วันที่</label><br />
+        <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
+        <button class="btn-select" >ค้นหาเส้นทาง</button>
+        </form>
+
+        <table>
+          <thead>
+            <tr>
+              <th>เลขที่รถ</th>
+              <th>ต้นทาง</th>
+              <th>ปลายทาง</th>
+              <th>เวลา</th>
+              <th>สถานะ</th>
+              <th>ราคา</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="item in searchs" :value="item" :key="item">
+              <td>{{ item.car_id.no }}</td>
+              <td>{{ item.startRoute }}</td>
+              <td>{{ item.endRoute }}</td>
+              <td>{{ item.time }}</td>
+              <td>{{ item.status }}</td> <!--ยังไม่มีตัวแปร status-->
+              <td>{{ item.price }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
       </div>
   
       
@@ -57,7 +79,81 @@
     
     
 <script>
-  
+import axios from 'axios'
+    export default  {
+      data() {
+        return {
+          routeData: {
+            startRoute: '',
+            endRoute: '',
+            date: '',
+            
+          },
+          selectStartRoute: '',
+          selectEndRoute: '',
+          routes: [],
+          routeschedule: [],
+          searchs: [],
+        }
+      },
+
+      async mounted() {
+        await this.fetchRoutes()
+        await this.fetchRouteschedule()
+        
+      },
+
+      methods: {
+
+        // get startRoute, endRoute
+        async fetchRoutes(){
+
+          await axios
+          .get('/routes/')
+          .then(response => {
+              console.log(response.data)
+              this.routes = response.data
+
+            }
+          ).catch(error => {
+          })
+
+        },
+
+        /*async fetchRouteschedule(){
+
+          await axios
+          .get('/addroutes/')
+          .then(response => {
+              console.log(response.data)
+              this.routeschedule = response.data
+
+            }
+          ).catch(error => {
+          })
+
+          },*/
+
+          // filter searchs
+        submitRouteForm () {
+
+        axios
+          .get(`/addroutes/?startRoute=${this.routeData.startRoute}&endRoute=${this.routeData.endRoute}&date=${this.routeData.date}`)
+          .then(response => {
+              console.log(response.data)
+              this.searchs = response.data
+
+            }
+          ).catch(error => {
+          })
+
+          },
+
+          
+         
+        }
+}  
+
 </script>
     
     

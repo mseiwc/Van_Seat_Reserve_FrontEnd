@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
 import HomeUserView from '../views/HomeUserView.vue'
-import RouteSelectionView from '../views/RouteSelectionView.vue'
 import SeatSelectionView from '../views/SeatSelectionView.vue'
 import SeatReservationView from '../views/SeatReservationView.vue'
 import PaymentView from '../views/PaymentView.vue'
@@ -49,11 +48,6 @@ const router = createRouter({
       path: '/home/driver',
       name: 'home/driver',
       component: HomeDriverView
-    },
-    {
-      path: '/selection/route',
-      name: 'selection/route',
-      component: RouteSelectionView
     },
     {
       path: '/selection/seat',
