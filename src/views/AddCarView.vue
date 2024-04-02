@@ -28,10 +28,10 @@
 
         <label>เลขที่รถ</label><br />
         <input type="text" v-model="carData.no" placeholder="" ><br />
-        <label for="dropdown">ชื่อคนขับ :&nbsp;</label>
+        <!-- <label for="dropdown">ชื่อคนขับ :&nbsp;</label>
         <select id="route-dropdown" v-model="carData.driver" class="route-input">
           <option v-for="item in drivers" :value="item.id" :key="item.id">{{ item.firstName }} {{ item.lastName }}</option>
-        </select>
+        </select> -->
         <label>ป้ายทะเบียนรถ</label><br />
         <input type="text" v-model="carData.carNumber" placeholder="" ><br />
       
@@ -55,28 +55,27 @@ import axios from 'axios'
         return {
           carData: {
             no: '',
-            driver: '',
             carNumber: '',
           },
-          drivers: [],
+          // drivers: [],
         }
       },
       async mounted() {
-        await this.fetchDrivers()
+        // await this.fetchDrivers()
       },
       // debug methods
     methods: {
-      async fetchDrivers(){
-          await axios
-            .get('/api/users/?role=driver')
-            .then(response => {
-              console.log(response.data)
-              this.drivers = response.data
+      // async fetchDrivers(){
+      //     await axios
+      //       .get('/api/users/?role=driver')
+      //       .then(response => {
+      //         console.log(response.data)
+      //         this.drivers = response.data
 
-            }
-          ).catch(error => {
-          })
-      },
+      //       }
+      //     ).catch(error => {
+      //     })
+      // },
 
       async submitAddCarForm() {
       console.log(this.carData)

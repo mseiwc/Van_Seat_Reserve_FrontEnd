@@ -5,6 +5,7 @@ import LoginView from '../views/LoginView.vue'
 import HomeUserView from '../views/HomeUserView.vue'
 import SeatSelectionView from '../views/SeatSelectionView.vue'
 import SeatReservationView from '../views/SeatReservationView.vue'
+import ConfirmReserveView from '../views/ConfirmReserveView.vue'
 import PaymentView from '../views/PaymentView.vue'
 import CheckPaymentView from '../views/CheckPaymentView.vue'
 
@@ -58,6 +59,11 @@ const router = createRouter({
       path: '/reserve',
       name: 'reserve',
       component: SeatReservationView
+    },
+    {
+      path: '/confirmreserve',
+      name: 'confirmreserve',
+      component: ConfirmReserveView
     },
     {
       path: '/payment',

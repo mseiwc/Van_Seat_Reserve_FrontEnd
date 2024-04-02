@@ -43,9 +43,14 @@
         <label for="fname">ราคา</label><br />
         <input type="number" v-model="routeData.price" placeholder="" ><br />
 
-        <label for="dropdown">ชื่อคนขับ :&nbsp;</label>
+        <label for="dropdown">รถคันที่ :&nbsp;</label>
         <select id="route-dropdown" v-model="routeData.car" class="route-input">
-          <option v-for="item in cars" :value="item.id" :key="item">{{ item.driver_id.firstName }} {{ item.driver_id.lastName }}</option>
+          <option v-for="item in cars" :value="item.id" :key="item">{{ item.no }}</option>
+        </select><br />
+
+        <label for="dropdown">ชื่อคนขับ :&nbsp;</label>
+        <select id="route-dropdown" v-model="routeData.driver" class="route-input">
+          <option v-for="item in drivers" :value="item.id" :key="item">{{ item.firstName }} {{ item.lastName }}</option>
         </select><br />
 
         <div class="button-container">
@@ -73,18 +78,21 @@ import axios from 'axios'
             date: '',
             time: '',
             price: '',
-            car: '',
+            driver: '',
             carNumber: '',
+            car: '',
           },
           selectStartRoute: '',
           selectEndRoute: '',
           selectDriver: '',
           routes: [],
-          cars: []
+          cars: [],
+          drivers: []
         }
       },
       async mounted() {
         await this.fetchRoutes()
+        await this.fetchDrivers()
         await this.fetchCars()
       },
       // debug methods
@@ -112,6 +120,18 @@ import axios from 'axios'
           })
 
         },
+      async fetchDrivers(){
+          await axios.get('/api/users/?role=driver').then(
+            response => {
+              console.log(response.data)
+              this.drivers = response.data
+
+            }
+          ).catch(error => {
+          })
+
+        },
+
 
         submitRouteForm () {
 

@@ -18,7 +18,7 @@
     <!--Tab menu-->
     <div class="padding-pd"></div>
   
-    <!--ฟีลเตอร์กรองคำค้นหา-->
+
     <div class="select-route-input">
       <h3>ตารางการเดินรถ</h3>
       <img src="../views/img/search.png" class="search-img">
@@ -53,13 +53,13 @@
                 <td>{{ item.startRoute_id.name }} - {{ item.endRoute_id.name }}</td>
                 <td>{{ item.car_id.carNumber }}</td>
                 <td>{{ item.car_id.no }}</td>
-                <td></td>
+                <td><button @click="deleteRoute(item.id)">Delete</button></td>
             </tr>
             
         </tbody>
     </table>
 
-    <button class="btn-addroute"><a href="http://localhost:5173/addcar">เพิ่มคนขับรถ</a></button>
+    <button class="btn-car"><a href="http://localhost:5173/addcar">เพิ่มคนขับรถ</a></button>
     <button class="btn-addroute"><a href="http://localhost:5173/addroute">เพิ่มรอบรถ</a></button>
   
 
@@ -138,6 +138,20 @@ import axios from 'axios'
 
       },
 
+      // destroy 
+      deleteRoute(index) {
+        const routeIdToDelete = this.addroutes[index].id;
+        axios
+          .delete(`/addroutes/${routeIdToDelete}`)
+          .then(response => {
+            console.log("Deleted:", response.data);
+            // หลังจากลบข้อมูลสำเร็จ ให้ลบข้อมูลในอาร์เรย์ addroutes ด้วย index
+            this.addroutes.splice(index, 1);
+          })
+          .catch(error => {
+            console.error("Error deleting route:", error);
+          });
+      },
 
       }
 }

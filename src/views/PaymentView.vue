@@ -22,15 +22,19 @@
   
     <div class="menu-align2">
       <h3>Scan QR Code</h3>
-      <!--รูป QR Code-->
+      <img src="../views/img/qr-code.jpg" class="qr-code">
       <h4>โปรดสแกนคิวอาร์โค้ดเพื่อชำระเงิน</h4>
     </div>
-    
+
+    <div class="img-file">
+      <label for="imgFile" class="img">เพิ่มหลักฐานการโอนเงิน</label>
+      <input type="file" @change="handleFileChange" id="imgFile" accept="image/*">
+    </div>
     
     <!--ส่งข้อมูลไปให้ Admin ยืนยัน-->
     <div class="button-container">
       <button class="btn-back">ย้อนกลับ</button>
-      <button class="btn-confirm">ชำระเงินสำเร็จ</button>
+      <button class="btn-confirm" @click="sendImg">ชำระเงินสำเร็จ</button>
     </div>
     
 
@@ -40,6 +44,41 @@
   
   
 <script>
+import axios from 'axios'
+    export default  {
+      data() {
+        return {
+          imgData: {
+            img: '',
+            
+          },
+
+        }
+      },
+
+
+      methods: {
+        handleFileChange(event) {
+          const file = event.target.files[0];
+          if (file) {
+            this.imgData.img = file;
+          }
+        },
+
+        sendImg () {
+          axios
+          .post('/tickets/', this.imgData)
+          .then(response => {
+              console.log(response.data)
+
+            }
+          ).catch(error => {
+          })
+
+          },
+        
+      }
+}
 
 </script>
   

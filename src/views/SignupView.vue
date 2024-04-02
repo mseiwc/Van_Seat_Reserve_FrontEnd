@@ -180,19 +180,37 @@ import axios from 'axios'
 }
 /* \Tab Menu */
 
+/* Home View */
+.btn-home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.btn-signup-home, .btn-login-home {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #0965A7;
+  padding: 13px;
+  margin: 1%;
+  width: calc(20% - 20px);
+}
+
 /* Signup Form */
 .signup-form h3 {
-    font-weight: bold;
-    font-size: 26px;
-    margin: 1% 0%;
+  font-weight: bold;
+  font-size: 26px;
+  margin: 1% 0%;
 }
 .signup-form input, select#role-dropdown {
-    text-align: center;
-    border-radius: 50px;
-    border: 1px solid #eee;
-    padding: 10px;
-    margin: 10px 0%;
-    transition: .3s border-color;
+  text-align: center;
+  border-radius: 50px;
+  border: 1px solid #eee;
+  padding: 10px;
+  margin: 10px 0%;
+  transition: .3s border-color;
 }
 .signup-form input:hover, select#role-dropdown:hover {
     border: 1px solid #aaa;
@@ -364,6 +382,24 @@ select#route-dropdown:hover,
 /* \Add Route */
 
 /* Payment */
+.qr-code {
+    margin: 2% 0%;
+}
+.img-file {
+    text-align: center;
+    margin: 2%;
+}
+.img {
+    background-color: #4ea7db;
+    color: white;
+    padding: 1%;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+#imgFile {
+    display: none;
+}
 /* ปุ่มย้อนกลับ-ยืนยัน */
 .button-container {
   display: flex;
@@ -426,4 +462,23 @@ select#route-dropdown:hover,
   border: 1px solid #aaa;
 }
 /* \Reserve */
+
+/* Confirm Reserve */
+.confirm {
+    border: 2px solid;
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    padding: 2%;
+    margin: auto;
+}
+.confirm th {
+    text-align: left;
+    font-size: 22px;
+}
+.confirm td {
+    font-size: 18px;
+    padding: 15px;
+}
+/* \Confirm Reserve */
 </style>

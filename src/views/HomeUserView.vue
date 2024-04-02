@@ -7,7 +7,7 @@
       <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
         <a href="http://localhost:5173/home/user" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
         <a href="http://localhost:5173/reserve" class="btn btn-primary mr-4" style="color: white;">จองที่นั่ง</a>
-        <a href="http://localhost:5173/payment" class="btn btn-primary mr-4" style="color: white;">ชำระเงิน</a>
+        <a href="http://localhost:5173/paymentlist" class="btn btn-primary mr-4" style="color: white;">ชำระเงิน</a>
         <a href="http://localhost:5173/checkpayment" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
       <button class="btn-profile">
@@ -20,28 +20,19 @@
     <!--Tab menu-->
     <div class="padding-pd"></div>
   
-    <!--ฟีลเตอร์กรองคำค้นหา-->
     <div class="select-route-input">
-      <h3>ตารางการเดินทาง</h3>
+      <h3>ตารางการเดินรถ</h3>
       <img src="../views/img/search.png" class="search-img">
-      <select id="route-dropdown" v-model="selectRoute" class="route-input">
-        <option value="" selected disabled>เลือกต้นทาง</option>
-        <option value="bangkok">กรุงเทพ</option>
-        <option value="pattaya">พัทยา</option>
-        <option value="khonkaen">ขอนแก่น</option>
-        <option value="ubonratchathani">อุบลราชธานี</option>
-        <option value="chiangmai">เชียงใหม่</option>
-      </select>
-      <select id="route-dropdown" v-model="selectRoute" class="route-input">
-        <option value="" selected disabled>เลือกปลายทาง</option>
-        <option value="bangkok">กรุงเทพ</option>
-        <option value="pattaya">พัทยา</option>
-        <option value="khonkaen">ขอนแก่น</option>
-        <option value="ubonratchathani">อุบลราชธานี</option>
-        <option value="chiangmai">เชียงใหม่</option>
-      </select>
-      <input type="date" id="filterInput" placeholder="วันที่เดินทาง">
-      <button class="btn-select">ค้นหา</button>
+      <form action="#">
+      <select id="route-dropdown" v-model="routeData.startRoute" class="route-input">
+        <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
+      </select><br />
+      <select id="route-dropdown" v-model="routeData.endRoute" class="route-input">
+        <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
+      </select><br />
+      <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
+      <button class="btn-select" @click="submitRouteForm">ค้นหา</button>
+      </form>
     </div>
     
     <table id="UserTable">
@@ -50,29 +41,21 @@
                 <th>วันที่</th>
                 <th>เวลา</th>
                 <th>เส้นทาง</th>
-                <th>เลขที่รถ</th>
+                <th>เลขรอบรถ</th>
                 <th>เลขที่นั่ง</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+            <tr v-for="item in tickets" :value="item" :key="item">
+                <td>{{ item.add_route_id.date }}</td>
+                <td>{{ item.add_route_id.time }}</td>
+                <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
+                <td>{{ item.add_route_id.car_id.no }}</td>
+                <td>{{ item }}</td>
+                
             </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <!-- เพิ่มข้อมูลเพิ่มเติมตามต้องการ -->
         </tbody>
     </table>
-
     
 
     <div class="padding-pd"></div>
@@ -81,32 +64,122 @@
   
   
 <script>
-/*const { Static } = require('vue')
+import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+    export default  {
+      setup() {
+        const userStore = useUserStore()
+        return {
+          userStore
+        }
+      },
 
-    // ฟังก์ชันกรองตาราง
-    function filterTable() {
-      var input, filter, table, tr, td, i, txtValue;
-      input = document.getElementById("filterInput");
-      filter = input.value.toUpperCase();
-      table = document.getElementById("myTable");
-      tr = table.getElementsByTagName("tr");
+      data() {
+        return {
+          routeData: {
+            startRoute: '',
+            endRoute: '',
+            date: '',
+            
+          },
+            routes: [],
+            tickets:[],
+            searchs: [],
+            
+            // userInfo
+            user: [],
+            userId: '',
+          
+        }
+      },
 
-      for (i = 0; i < tr.length; i++) {
-          // จะกรองตารางเฉพาะที่อยู่ในส่วน tbody
-          td = tr[i].getElementsByTagName("td")[0];
-          if (td) {
-              txtValue = td.textContent || td.innerText;
-              if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                  tr[i].style.display = "";
-              } else {
-                  tr[i].style.display = "none";
+      async mounted() {
+        await this.fetchRoutes()
+        await this.fetchTickets()
+      },
+
+      methods: {
+        // get user id
+        async getUserInfo(){
+          this.userStore.initStore()
+          this.user = this.userStore.user
+          console.log(this.user)
+          this.userId = this.userStore.user.id //user_id
+          console.log(this.userId)
+
+        },
+
+        // get startRoute, endRoute
+        async fetchRoutes(){
+
+          await axios
+          .get('/routes/')
+          .then(response => {
+              console.log(response.data)
+              this.routes = response.data
+
+            }
+          ).catch(error => {
+          })
+
+        },
+
+        // แสดงตารางทั้งหมด
+        async fetchTickets(){
+
+          // get user id # 90
+          this.userStore.initStore()
+          this.user = this.userStore.user
+          console.log(this.user)
+          this.userId = this.userStore.user.id //user_id
+          console.log(this.userId)
+
+          await axios
+          .get(`/tickets/?user_id=${this.userId}`)
+          .then(response => {
+              console.log(response.data)
+              this.tickets = response.data
+              /*this.searchs = response.data*/
+
+            }
+          ).catch(error => {
+          })
+
+          },
+
+        // แสดงตารางข้อมูลที่ query
+        submitRouteForm () {
+          /**/
+          // ดึงข้อมูล startRoute, endRoute, และ date จาก routeData
+          /*const startRoute = this.routeData.startRoute;
+          const endRoute = this.routeData.endRoute;
+          const date = this.routeData.date;*/
+
+          // ค้นหาข้อมูลในอาเรย์ tickets โดยใช้ startRoute, endRoute, และ date
+          /*this.searchs = this.tickets.filter(ticket => {
+          return ticket.add_route_id.startRoute === this.routeData.startRoute &&
+                ticket.add_route_id.endRoute === this.routeData.endRoute &&
+                ticket.add_route_id.date === this.routeData.date;
+          });
+
+          console.log(this.searchs)*/
+
+          /*axios
+            .get(`/tickets/?user_id=${this.userId}`)
+            .then(response => {
+                console.log(response.data)
+                this.tickets = response.data // จากแสดงตารางทั้งหมด (addroutes) -> ถูกเปลี่ยนเป็นแสดงตารางจากข้อมูลที่ถูก query แล้ว (response.data)
+                
+
               }
-          }
-      }
-    }
+            ).catch(error => {
+            })*/
 
-        // เพิ่ม Event Listener เพื่อกรองเมื่อมีการพิมพ์ข้อมูลใน input
-        document.getElementById("filterInput").addEventListener("input", filterTable);*/
+      },
+
+
+      }
+}
 </script>
   
   
