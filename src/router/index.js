@@ -3,14 +3,16 @@ import HomeView from '../views/HomeView.vue'
 import SignupView from '../views/SignupView.vue'
 import LoginView from '../views/LoginView.vue'
 import HomeUserView from '../views/HomeUserView.vue'
-import SeatSelectionView from '../views/SeatSelectionView.vue'
-import SeatReservationView from '../views/SeatReservationView.vue'
 import ConfirmReserveView from '../views/ConfirmReserveView.vue'
 import PaymentView from '../views/PaymentView.vue'
-import CheckPaymentView from '../views/CheckPaymentView.vue'
+import CheckPaymentUserView from '../views/CheckPaymentUserView.vue'
+
 
 import HomeAdminView from '../views/HomeAdminView.vue'
 import AddRouteView from '../views/AddRouteView.vue'
+import CheckPaymentAdminView from '../views/CheckPaymentAdminView.vue'
+import SeatSelectionView from '../views/SeatSelectionView.vue'
+import SeatReservationView from '../views/SeatReservationView.vue'
 
 import HomeDriverView from '../views/HomeDriverView.vue'
 
@@ -71,9 +73,19 @@ const router = createRouter({
       component: PaymentView
     },
     {
-      path: '/checkpayment',
-      name: 'checkPayment',
-      component: CheckPaymentView
+      path: '/paymentlist',
+      name: 'paymentlist',
+      component: () => import('../views/PaymentListView.vue')
+    },
+    {
+      path: '/checkpaymentuser',
+      name: 'checkPaymentuser',
+      component: CheckPaymentUserView
+    },
+    {
+      path: '/checkpaymentadmin',
+      name: 'checkPaymentadmin',
+      component: CheckPaymentAdminView
     },
     {
       path: '/addroute',
@@ -85,12 +97,6 @@ const router = createRouter({
       name: 'route',
       component: () => import('../views/RouteView.vue')
     },
-    {
-      path: '/paymentlist',
-      name: 'paymentlist',
-      component: () => import('../views/PaymentListView.vue')
-    }
-    ,
     {
       path: '/addcar',
       name: 'addcar',
