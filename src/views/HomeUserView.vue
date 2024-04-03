@@ -25,13 +25,15 @@
       <img src="../views/img/search.png" class="search-img">
       <form action="#">
       <select id="route-dropdown" v-model="routeData.startRoute" class="route-input">
+        <option value="" >-</option>
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select><br />
       <select id="route-dropdown" v-model="routeData.endRoute" class="route-input">
+        <option value="" >-</option>
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select><br />
       <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
-      <button class="btn-select" @click="submitRouteForm">ค้นหา</button>
+      <button class="btn-select" @click.prevent="submitRouteForm">ค้นหา</button>
       </form>
     </div>
     
@@ -46,12 +48,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in tickets" :value="item" :key="item">
+            <tr v-for="item in searchs" :value="item" :key="item">
                 <td>{{ item.add_route_id.date }}</td>
                 <td>{{ item.add_route_id.time }}</td>
                 <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
                 <td>{{ item.add_route_id.car_id.no }}</td>
-                <td>{{ item }}</td>
+                <td>{{ item.seat }}</td>
                 
             </tr>
         </tbody>
@@ -103,9 +105,9 @@ import { useUserStore } from '@/stores/user'
         async getUserInfo(){
           this.userStore.initStore()
           this.user = this.userStore.user
-          console.log(this.user)
+          // console.log(this.user)
           this.userId = this.userStore.user.id //user_id
-          console.log(this.userId)
+          // console.log(this.userId)
 
         },
 
@@ -115,7 +117,7 @@ import { useUserStore } from '@/stores/user'
           await axios
           .get('/routes/')
           .then(response => {
-              console.log(response.data)
+              // console.log(response.data)
               this.routes = response.data
 
             }
@@ -130,16 +132,16 @@ import { useUserStore } from '@/stores/user'
           // get user id # 90
           this.userStore.initStore()
           this.user = this.userStore.user
-          console.log(this.user)
+          // console.log(this.user)
           this.userId = this.userStore.user.id //user_id
-          console.log(this.userId)
+          // console.log(this.userId)
 
           await axios
           .get(`/tickets/?user_id=${this.userId}`)
           .then(response => {
               console.log(response.data)
               this.tickets = response.data
-              /*this.searchs = response.data*/
+              this.searchs = response.data
 
             }
           ).catch(error => {
@@ -147,35 +149,20 @@ import { useUserStore } from '@/stores/user'
 
           },
 
-        // แสดงตารางข้อมูลที่ query
-        submitRouteForm () {
-          /**/
-          // ดึงข้อมูล startRoute, endRoute, และ date จาก routeData
-          /*const startRoute = this.routeData.startRoute;
-          const endRoute = this.routeData.endRoute;
-          const date = this.routeData.date;*/
+          submitRouteForm () {
+            // ค้นหาข้อมูลในอาเรย์ tickets โดยใช้ startRoute, endRoute, และ date
+            this.searchs = this.tickets.filter(ticket => {
+              // ตรวจสอบว่ามีการเลือกค่าใน dropdown หรือไม่ ถ้าไม่มีให้เช็คทุกค่า
+              const startRouteMatch = this.routeData.startRoute ? ticket.add_route_id.startRoute === this.routeData.startRoute : true;
+              const endRouteMatch = this.routeData.endRoute ? ticket.add_route_id.endRoute === this.routeData.endRoute : true;
+              const dateMatch = this.routeData.date ? ticket.add_route_id.date === this.routeData.date : true;
 
-          // ค้นหาข้อมูลในอาเรย์ tickets โดยใช้ startRoute, endRoute, และ date
-          /*this.searchs = this.tickets.filter(ticket => {
-          return ticket.add_route_id.startRoute === this.routeData.startRoute &&
-                ticket.add_route_id.endRoute === this.routeData.endRoute &&
-                ticket.add_route_id.date === this.routeData.date;
-          });
+              return startRouteMatch && endRouteMatch && dateMatch;
+            });
 
-          console.log(this.searchs)*/
+          }
 
-          /*axios
-            .get(`/tickets/?user_id=${this.userId}`)
-            .then(response => {
-                console.log(response.data)
-                this.tickets = response.data // จากแสดงตารางทั้งหมด (addroutes) -> ถูกเปลี่ยนเป็นแสดงตารางจากข้อมูลที่ถูก query แล้ว (response.data)
-                
 
-              }
-            ).catch(error => {
-            })*/
-
-      },
 
 
       }
