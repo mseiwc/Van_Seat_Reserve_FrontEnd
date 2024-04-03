@@ -44,42 +44,40 @@
   
   
 <script>
-// import axios from 'axios'
-//     export default  {
-//       data() {
-//         return {
-//           imgData: {
-//             img: '',
-            
-//           },
+import axios from 'axios'
+export default {
+  data() {
+    return {
+      imgData: {
+        img: null
+      }
+    };
+  },
+  methods: {
+    handleFileChange(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.imgData.img = file;
+        this.uploadFile(file);
+      }
+    },
+    uploadFile(file) {
+      const formData = new FormData();
+      formData.append('file', file);
 
-//         }
-//       },
-
-
-//       methods: {
-//         handleFileChange(event) {
-//           const file = event.target.files[0];
-//           if (file) {
-//             this.imgData.img = file;
-//           }
-//         },
-
-//         sendImg () {
-//           axios
-//           .post('/tickets/', this.imgData)
-//           .then(response => {
-//               console.log(response.data)
-
-//             }
-//           ).catch(error => {
-//           })
-
-//           },
-        
-//       }
-// }
-
+      // Send the file to your Django server
+      axios.post('/api/upload/', formData)
+        .then(response => {
+          console.log('File uploaded successfully');
+          // Handle the response from the server if needed
+        })
+        .catch(error => {
+          console.error('Error uploading file:', error);
+          // Handle the error if the upload fails
+        });
+    }
+  }
+}
 </script>
   
   

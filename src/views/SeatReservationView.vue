@@ -31,12 +31,10 @@
 
         <label for="dropdown">ต้นทาง :&nbsp;</label>
         <select id="reserve-dropdown" v-model="routeData.startRoute" class="reserve-input">
-          <option value="" >-</option>
           <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
         <label for="dropdown">ปลายทาง :&nbsp;</label>
         <select id="reserve-dropdown" v-model="routeData.endRoute" class="reserve-input">
-          <option value="" >-</option>
           <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
         <label for="fname" >วันที่ :&nbsp;</label>
