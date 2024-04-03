@@ -38,8 +38,8 @@
           <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
         <label for="fname" >วันที่ :&nbsp;</label>
-        <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
-        <button class="btn-select" >ค้นหาเส้นทาง</button>
+        <input type="date" v-model="routeData.date" id="reserveInput" class="reserve-input" placeholder="วันที่เดินทาง">
+        <button class="btn-select-reserve" >ค้นหาเส้นทาง</button>
         </form>
 
         <table>

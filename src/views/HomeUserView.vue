@@ -20,16 +20,16 @@
     <!--Tab menu-->
     <div class="padding-pd"></div>
   
-    <div class="select-route-input">
+    <div class="menu-align2">
       <h3>ตารางการเดินรถ</h3>
+    </div> 
+    <div class="select-route-input">
       <img src="../views/img/search.png" class="search-img">
       <form action="#">
-      <select id="route-dropdown" v-model="routeData.startRoute" class="route-input">
-        <option value="" >-</option>
+      <select id="route-dropdown" v-model="routeData.startRoute" class="select-route-input">
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select><br />
-      <select id="route-dropdown" v-model="routeData.endRoute" class="route-input">
-        <option value="" >-</option>
+      <select id="route-dropdown" v-model="routeData.endRoute" class="select-route-input">
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select><br />
       <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">

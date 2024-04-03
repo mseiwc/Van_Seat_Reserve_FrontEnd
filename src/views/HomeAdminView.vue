@@ -6,6 +6,9 @@
       <img src="../views/img/Logo.png" class="logo-img">
       <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
         <a href="http://localhost:5173/home/admin" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
+        <a href="http://localhost:5173/route" class="btn btn-primary mr-4" style="color: white;">เพิ่มเส้นทาง</a>
+        <a href="http://localhost:5173/addroute" class="btn btn-primary mr-4" style="color: white;">เพิ่มรอบรถ</a>
+        <a href="http://localhost:5173/addcar" class="btn btn-primary mr-4" style="color: white;">เพิ่มคนขับรถ</a>
         <a href="http://localhost:5173/checkpaymentadmin" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
       <button class="btn-profile">
@@ -19,17 +22,16 @@
     <div class="padding-pd"></div>
   
 
-    <div class="select-route-input">
+    <div class="menu-align2">
       <h3>ตารางการเดินรถ</h3>
-    </div>  
+    </div> 
     <div class="select-route-input">
-
       <img src="../views/img/search.png" class="search-img">
       <form action="#" @submit.prevent="submitRouteForm">
-      <select id="route-dropdown" v-model="routeData.startRoute" class="route-input">
+      <select id="route-dropdown" v-model="routeData.startRoute" class="select-route-input">
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select>
-      <select id="route-dropdown" v-model="routeData.endRoute" class="route-input">
+      <select id="route-dropdown" v-model="routeData.endRoute" class="select-route-input">
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select>
       <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
@@ -58,14 +60,13 @@
                 <td>{{ item.startRoute_id.name }} - {{ item.endRoute_id.name }}</td>
                 <td>{{ item.car_id.carNumber }}</td>
                 <td>{{ item.car_id.no }}</td>
-                <td><button @click.prevent="deleteRoute(item)">Delete</button></td>
+                <td><button class="btn-delete-route" @click.prevent="deleteRoute(item)">ลบรอบรถ</button></td>
             </tr>
             
         </tbody>
     </table>
 
-    <button class="btn-car"><a href="http://localhost:5173/addcar">เพิ่มคนขับรถ</a></button>
-    <button class="btn-addroute"><a href="http://localhost:5173/addroute">เพิ่มรอบรถ</a></button>
+
   
 
     <div class="padding-pd"></div>
