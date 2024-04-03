@@ -186,7 +186,7 @@ import axios from 'axios'
   flex-direction: column;
   align-items: center;
 }
-.btn-signup-home, .btn-login-home {
+.btn-home a {
   border-radius: 50px;
   border-style: none;
   box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
@@ -196,6 +196,7 @@ import axios from 'axios'
   padding: 15px;
   margin: 1%;
   width: calc(20% - 20px);
+  text-align: center;
 }
 
 /* Signup Form */

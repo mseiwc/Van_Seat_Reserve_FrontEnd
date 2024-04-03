@@ -9,8 +9,8 @@
     <div class="padding-pd"></div>
   
     <div class="btn-home">
-      <button class="btn-signup-home"><router-link to="/signup">สร้างบัญชีผู้ใช้</router-link></button>
-      <button class="btn-login-home"><router-link to="/login">เข้าสู่ระบบ</router-link></button>
+      <router-link to="/signup"><button class="btn-signup-home">สร้างบัญชีผู้ใช้</button></router-link>
+      <router-link to="/login"><button class="btn-login-home">เข้าสู่ระบบ</button></router-link>
     </div>
 
     <div class="padding-pd"></div>
