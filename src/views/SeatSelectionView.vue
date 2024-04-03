@@ -8,7 +8,7 @@
           <a href="http://localhost:5173/home/user" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
           <a href="http://localhost:5173/reserve" class="btn btn-primary mr-4" style="color: white;">จองที่นั่ง</a>
           <a href="http://localhost:5173/payment" class="btn btn-primary mr-4" style="color: white;">ชำระเงิน</a>
-          <a href="http://localhost:5173/checkpayment" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
+          <a href="http://localhost:5173/checkpaymentuser" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
         </div>
         <button class="btn-profile">
         <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
@@ -19,32 +19,44 @@
       </div>
       <!--Tab menu-->
       <div class="padding-pd"></div>
+
+      <div class="seat-container1">
+        <table v-for="item in tickets" :value="item" :key="item">
+          <tr>
+            <td rowspan="2">{{ item.add_route_id.car_id.no }}</td>
+            <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
+          </tr>
+          <tr>
+            <td>{{ item.add_route_id.time }}</td>
+          </tr>
+        </table>
+      </div>
     
-      <div class="seat-container">
-        <div class="driver">คนขับรถ</div>
+      <div class="seat-container2">
+        <div class="btn-driver">คนขับรถ</div>
         <div class="seat-empty"></div>
-        <button class="btn-seat">3</button>
-        <button class="btn-seat">4</button>
-        <button class="btn-seat">5</button>
-        <button class="btn-seat">6</button>
-        <div class="seat-empty"></div>
-        <div class="seat-empty"></div>
-        <button class="btn-seat">9</button>
-        <button class="btn-seat">10</button>
-        <button class="btn-seat">11</button>
-        <button class="btn-seat">12</button>
+        <button class="btn-seat4">4</button>
+        <button class="btn-seat7">7</button>
+        <button class="btn-seat10">10</button>
+        <button class="btn-seat13">13</button>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
-        <button class="btn-seat">15</button>
+        <button class="btn-seat3">3</button>
+        <button class="btn-seat6">6</button>
+        <button class="btn-seat9">9</button>
+        <button class="btn-seat12">12</button>
+        <div class="seat-empty"></div>
+        <div class="seat-empty"></div>
+        <button class="btn-seat2">2</button>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
-        <button class="btn-seat">19</button>
+        <button class="btn-seat1">1</button>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
-        <button class="btn-seat">22</button>
-        <button class="btn-seat">23</button>
-        <button class="btn-seat">24</button>
+        <button class="btn-seat5">5</button>
+        <button class="btn-seat8">8</button>
+        <button class="btn-seat11">11</button>
       </div>
       
       <div class="padding-pd"></div>
@@ -61,32 +73,42 @@
     
     
 <script>
-  
+import axios from 'axios'
+    export default  {
+      data() {
+        return {
+          tickets: [],
+
+        }
+      },
+
+      async mounted() {
+        await this.fetchTickets()
+      },
+
+
+      methods: {
+        async fetchTickets(){
+
+          await axios
+          .get('/tickets/')
+          .then(response => {
+              console.log(response.data)
+              this.tickets = response.data
+
+            }
+          ).catch(error => {
+          })
+
+        },
+        
+      }
+}  
 </script>
     
     
     
 <style>
-.seat-container {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 4 คอลัมน์ */
-  grid-template-rows: repeat(4, 1fr); /* 8 แถว */
-  gap: 15px; /* ระยะห่างระหว่าง grid item */
-  padding: 0% 20%;
-  justify-items: center;
-  font-size: 18px;
-}
 
-.btn-seat, .driver {
-  padding: 20px;
-  text-align: center;
-  background-color: #4ea7db;
-  border-radius: 30px;
-  width: 60%;
-  color: #fff;
-}
-.driver{
-  background-color: #EAEAEA;
-}
 </style>
         

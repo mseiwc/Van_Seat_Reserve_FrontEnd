@@ -463,6 +463,33 @@ select#route-dropdown:hover,
 }
 /* \Reserve */
 
+/* Seat */
+.seat-container2 {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 4 คอลัมน์ */
+  grid-template-rows: repeat(4, 1fr); /* 8 แถว */
+  gap: 15px; /* ระยะห่างระหว่าง grid item */
+  padding: 0% 20%;
+  justify-items: center;
+  font-size: 18px;
+  margin-top: 5%;
+}
+
+.btn-driver, .btn-seat1, .btn-seat2, .btn-seat3, .btn-seat4, 
+.btn-seat5, .btn-seat6, .btn-seat7, .btn-seat8, .btn-seat9, 
+.btn-seat10, .btn-seat11, .btn-seat12, .btn-seat13 {
+  padding: 20px;
+  text-align: center;
+  background-color: #4ea7db;
+  border-radius: 30px;
+  width: 60%;
+  color: #fff;
+}
+.btn-driver{
+  background-color: #EAEAEA;
+}
+/* \Server */
+
 /* Confirm Reserve */
 .confirm {
     border: 2px solid;

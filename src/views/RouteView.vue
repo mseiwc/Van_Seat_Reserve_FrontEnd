@@ -5,9 +5,8 @@
     <div class="tab-menu" style="background-color: #4EA7DB;display: grid; grid-template-columns: 3fr 10fr 3fr;align-items: center;">
       <img src="../views/img/Logo.png" class="logo-img">
       <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
-        <a href="" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
-        <a href="" class="btn btn-primary mr-4" style="color: white;">ตารางการเดินรถ</a>
-        <a href="" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
+        <a href="http://localhost:5173/home/admin" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
+        <a href="http://localhost:5173/checkpaymentadmin" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
       <button class="btn-profile">
       <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
