@@ -37,41 +37,27 @@
         <select id="reserve-dropdown" v-model="routeData.endRoute" class="reserve-input">
           <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
-        <label for="fname" >วันที่</label><br />
+        <label for="fname" >วันที่ :&nbsp;</label>
         <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
         <button class="btn-select" >ค้นหาเส้นทาง</button>
         </form>
 
         <table>
-          <thead>
-            <tr>
-              <th>เลขที่รถ</th>
-              <th>ต้นทาง</th>
-              <th>ปลายทาง</th>
-              <th>เวลา</th>
-              <th>สถานะ</th>
-              <th>ราคา</th>
-            </tr>
-          </thead>
-
           <tbody>
             <tr v-for="item in searchs" :value="item" :key="item">
               <td>{{ item.car_id.no }}</td>
-              <td>{{ item.startRoute }}</td>
-              <td>{{ item.endRoute }}</td>
+              <td>{{ item.startRoute_id.name }}</td>
+              <td>{{ item.endRoute_id.name }}</td>
               <td>{{ item.time }}</td>
-              <td>{{ item.status }}</td> <!--ยังไม่มีตัวแปร status-->
+              <td>{{ item.status }}</td>
               <td>{{ item.price }}</td>
+              <td><button class ="btn-reserve-table">จองที่นั่ง</button></td>
             </tr>
           </tbody>
         </table>
+        </div>
 
 
-      </div>
-  
-      
-      
-  
       <div class="padding-pd"></div>
   </body>
   

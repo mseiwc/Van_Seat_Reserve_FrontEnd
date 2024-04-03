@@ -295,45 +295,8 @@ import axios from 'axios'
   width: 4%;
   margin: 1% 0%;
 }
-.select-route-input {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  margin-bottom: 2%;
-}
-.select-route-input h3 {
-  font-weight: bold;
-  font-size: 26px;
-  margin: 1% 0%;
-  flex: 100%; /* ให้รวมในบรรทัดเดียวกัน */
-}
-select#route-dropdown,
-.select-route-input input,
-.btn-select {
-  text-align: center;
-  border-radius: 50px;
-  border: 1px solid #eee;
-  padding: 10px;
-  margin: 10px;
-  transition: .3s border-color;
-  flex: 0 0 calc(20% - 20px);
-}
-select#route-dropdown:hover,
-.select-route-input input:hover {
-  border: 1px solid #aaa;
-}
-.btn-select {
-  border-radius: 50px;
-  border-style: none;
-  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
-  box-sizing: border-box;
-  color: #ffffff;
-  background-color: #0965A7;
-  padding: 13px;
-  width: calc(10% - 20px);
-}
+
+
 /* \ช่อง Search */
 
 /* ตาราง */
@@ -443,12 +406,36 @@ select#route-dropdown:hover,
 /* \Payment */
 
 /* Reserve */
+.reserve-form {
+    text-align: center;
+}
+.reserve-form label {
+    margin-left: 1%;
+}
+.reserve-form table {
+    margin: auto;
+    width: 80%;
+}
+.reserve-form td {
+    padding: 15px;
+}
+.btn-reserve-table {
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #0965A7;
+    padding: 15px;
+    width: 50%;
+}
 .reserve {
   display: flex;
   flex-direction: column;
   align-items: center;
   
 }
+
 .reserve-input, #reserveInput {
   padding: 10px;
   width: 20%;
