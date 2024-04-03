@@ -65,14 +65,46 @@
       
       <div class="padding-pd"></div>
       <div class="padding-pd"></div>
+
+      <v-row>
+        <v-col cols="12" col="6">
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn style="width: 20%; margin: 2% 75%;" v-bind="props" text>เลือกที่นั่ง</v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 1</v-btn>  </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 2</v-btn> </v-list-item-title> 
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 3</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 4</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 5</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 6</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 7</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 8</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 9</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 10</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 11</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 12</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 13</v-btn> </v-list-item-title>
+        </v-list>
+      </v-menu>
+      </v-col>
+      </v-row>
+      <div v-if="displayedText !== 'กหฟก'">
+        <p style="margin: 0% 0% 2% 75%; width: 100%;">{{ displayedText }}</p>
+      </div>
+
       <div class="button-container">
         <button class="btn-back">ย้อนกลับ</button>
         <button class="btn-confirm">จองที่นั่ง</button>
       </div>
   
+      
+
       <div class="padding-pd"></div>
   </body>
-  
+
 </template>
     
     
@@ -85,7 +117,7 @@ import axios from 'axios'
           selectedAddroute:[],
           addRouteId: '',
           addRoutes: [],
-          
+          displayedText: '',
 
         }
       },
@@ -118,6 +150,10 @@ import axios from 'axios'
         selectSeat(seatNumber) {
           console.log('Selected seat:', seatNumber);
           // ทำอย่างอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อเลือกที่นั่ง
+        },
+
+        displayText(text) {
+          this.displayedText = text;
         }
         
       }
