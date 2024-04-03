@@ -160,7 +160,11 @@ import { useUserStore } from '@/stores/user'
               return startRouteMatch && endRouteMatch && dateMatch;
             });
 
-          }
+          },
+          logout(){
+              this.userStore.removeToken()
+              this.$router.push('/login')
+          },
 
 
 

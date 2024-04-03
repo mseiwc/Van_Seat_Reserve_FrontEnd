@@ -24,7 +24,7 @@
         <div>{{  addRoutes.id }}</div>
         <div>{{  addRoutes.date }}</div>
         <div>{{  addRoutes.time }}</div>
-        <div>{{  addRoutes.startRoute_id.name }} - {{  addRoutes.endRoute_id.name }}</div>
+        <!-- <div>{{  addRoutes.startRoute_id.name }} - {{  addRoutes.endRoute_id.name }}</div> -->
         <!-- <table v-for="item in tickets" :value="item" :key="item">
           <tr>
             <td rowspan="2">{{ item.add_route_id.car_id.no }}</td>
@@ -39,28 +39,28 @@
       <div class="seat-container2">
         <div class="btn-driver">คนขับรถ</div>
         <div class="seat-empty"></div>
-        <button class="btn-seat4">4</button>
-        <button class="btn-seat7">7</button>
-        <button class="btn-seat10">10</button>
-        <button class="btn-seat13">13</button>
+        <button class="btn-seat4" @click="selectSeat(4)">4</button>
+        <button class="btn-seat7" @click="selectSeat(7)">7</button>
+        <button class="btn-seat10" @click="selectSeat(10)">10</button>
+        <button class="btn-seat13" @click="selectSeat(13)">13</button>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
-        <button class="btn-seat3">3</button>
-        <button class="btn-seat6">6</button>
-        <button class="btn-seat9">9</button>
-        <button class="btn-seat12">12</button>
+        <button class="btn-seat3" @click="selectSeat(3)">3</button>
+        <button class="btn-seat6" @click="selectSeat(6)">6</button>
+        <button class="btn-seat9" @click="selectSeat(9)">9</button>
+        <button class="btn-seat12" @click="selectSeat(12)">12</button>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
-        <button class="btn-seat2">2</button>
+        <button class="btn-seat2" @click="selectSeat(2)">2</button>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
-        <button class="btn-seat1">1</button>
+        <button class="btn-seat1" @click="selectSeat(1)">1</button>
         <div class="seat-empty"></div>
         <div class="seat-empty"></div>
-        <button class="btn-seat5">5</button>
-        <button class="btn-seat8">8</button>
-        <button class="btn-seat11">11</button>
+        <button class="btn-seat5" @click="selectSeat(5)">5</button>
+        <button class="btn-seat8" @click="selectSeat(8)">8</button>
+        <button class="btn-seat11" @click="selectSeat(11)">11</button>
       </div>
       
       <div class="padding-pd"></div>
@@ -84,7 +84,8 @@ import axios from 'axios'
           tickets: [],
           selectedAddroute:[],
           addRouteId: '',
-          addRoutes: []
+          addRoutes: [],
+          
 
         }
       },
@@ -114,6 +115,10 @@ import axios from 'axios'
           })
 
         },
+        selectSeat(seatNumber) {
+          console.log('Selected seat:', seatNumber);
+          // ทำอย่างอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อเลือกที่นั่ง
+        }
         
       }
 }  

@@ -44,41 +44,41 @@
   
   
 <script>
-import axios from 'axios'
-    export default  {
-      data() {
-        return {
-          imgData: {
-            img: '',
+// import axios from 'axios'
+//     export default  {
+//       data() {
+//         return {
+//           imgData: {
+//             img: '',
             
-          },
+//           },
 
-        }
-      },
+//         }
+//       },
 
 
-      methods: {
-        handleFileChange(event) {
-          const file = event.target.files[0];
-          if (file) {
-            this.imgData.img = file;
-          }
-        },
+//       methods: {
+//         handleFileChange(event) {
+//           const file = event.target.files[0];
+//           if (file) {
+//             this.imgData.img = file;
+//           }
+//         },
 
-        sendImg () {
-          axios
-          .post('/tickets/', this.imgData)
-          .then(response => {
-              console.log(response.data)
+//         sendImg () {
+//           axios
+//           .post('/tickets/', this.imgData)
+//           .then(response => {
+//               console.log(response.data)
 
-            }
-          ).catch(error => {
-          })
+//             }
+//           ).catch(error => {
+//           })
 
-          },
+//           },
         
-      }
-}
+//       }
+// }
 
 </script>
   
