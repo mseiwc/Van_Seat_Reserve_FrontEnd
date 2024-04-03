@@ -31,10 +31,12 @@
 
         <label for="dropdown">ต้นทาง :&nbsp;</label>
         <select id="reserve-dropdown" v-model="routeData.startRoute" class="reserve-input">
+          <option value="" >-</option>
           <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
         <label for="dropdown">ปลายทาง :&nbsp;</label>
         <select id="reserve-dropdown" v-model="routeData.endRoute" class="reserve-input">
+          <option value="" >-</option>
           <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
         </select>
         <label for="fname" >วันที่ :&nbsp;</label>
@@ -51,7 +53,11 @@
               <td>{{ item.time }}</td>
               <td>{{ item.status }}</td>
               <td>{{ item.price }}</td>
-              <td><button class ="btn-reserve-table">จองที่นั่ง</button></td>
+              <td>
+                <button class="btn-reserve-table" @click.prevent="submitReserve(item)">
+                <RouterLink :to="{ name: 'selectionSeat', params: { itemId: item.id } }">จองที่นั่ง</RouterLink>
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -66,6 +72,7 @@
     
 <script>
 import axios from 'axios'
+import { RouterLink } from 'vue-router';
     export default  {
       data() {
         return {
@@ -106,39 +113,33 @@ import axios from 'axios'
 
         },
 
-        /*async fetchRouteschedule(){
+        async fetchRouteschedule(){
 
           await axios
           .get('/addroutes/')
           .then(response => {
               console.log(response.data)
               this.routeschedule = response.data
-
-            }
-          ).catch(error => {
-          })
-
-          },*/
-
-          // filter searchs
-        submitRouteForm () {
-
-        axios
-          .get(`/addroutes/?startRoute=${this.routeData.startRoute}&endRoute=${this.routeData.endRoute}&date=${this.routeData.date}`)
-          .then(response => {
-              console.log(response.data)
-              this.searchs = response.data
+              this.searchs =response.data
 
             }
           ).catch(error => {
           })
 
           },
+          submitRouteForm() {
+            this.searchs = this.routeschedule.filter(item => {
+                // ตรวจสอบว่ามีการเลือกค่าใน dropdown หรือไม่ ถ้าไม่มีให้เช็คทุกค่า
+                const startRouteMatch = this.routeData.startRoute ? item.startRoute_id.id === this.routeData.startRoute : true;
+                const endRouteMatch = this.routeData.endRoute ? item.endRoute_id.id === this.routeData.endRoute : true;
+                const dateMatch = this.routeData.date ? item.date === this.routeData.date : true;
 
-          
-         
-        }
-}  
+                return startRouteMatch && endRouteMatch && dateMatch;
+            });
+        },
+      }
+
+}
 
 </script>
     

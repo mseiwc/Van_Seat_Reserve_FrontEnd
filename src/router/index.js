@@ -53,9 +53,10 @@ const router = createRouter({
       component: HomeDriverView
     },
     {
-      path: '/selection/seat',
-      name: 'selection/seat',
-      component: SeatSelectionView
+      path: '/selection/seat/:itemId',
+      name: 'selectionSeat',
+      component: SeatSelectionView,
+      props: true // ทำให้ Vue Router ส่งพารามิเตอร์เป็น props ไปยัง component
     },
     {
       path: '/reserve',

@@ -21,7 +21,11 @@
       <div class="padding-pd"></div>
 
       <div class="seat-container1">
-        <table v-for="item in tickets" :value="item" :key="item">
+        <div>{{  addRoutes.id }}</div>
+        <div>{{  addRoutes.date }}</div>
+        <div>{{  addRoutes.time }}</div>
+        <div>{{  addRoutes.startRoute_id.name }} - {{  addRoutes.endRoute_id.name }}</div>
+        <!-- <table v-for="item in tickets" :value="item" :key="item">
           <tr>
             <td rowspan="2">{{ item.add_route_id.car_id.no }}</td>
             <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
@@ -29,7 +33,7 @@
           <tr>
             <td>{{ item.add_route_id.time }}</td>
           </tr>
-        </table>
+        </table> -->
       </div>
     
       <div class="seat-container2">
@@ -78,23 +82,32 @@ import axios from 'axios'
       data() {
         return {
           tickets: [],
+          selectedAddroute:[],
+          addRouteId: '',
+          addRoutes: []
 
         }
       },
+      props: ['itemId'],
+      created() {
+        // เมื่อหน้านี้ถูกสร้างขึ้น ให้ดึงค่า itemId จาก Vue Router
+        this.addRouteId = this.$route.params.itemId
+      },
 
       async mounted() {
-        await this.fetchTickets()
+
+        await this.fetchAddRoute(this.addRouteId)
       },
 
 
       methods: {
-        async fetchTickets(){
+        async fetchAddRoute(itemId){
 
           await axios
-          .get('/tickets/')
+          .get(`/addroutes/${itemId}/`)
           .then(response => {
               console.log(response.data)
-              this.tickets = response.data
+              this.addRoutes = response.data
 
             }
           ).catch(error => {
@@ -111,4 +124,3 @@ import axios from 'axios'
 <style>
 
 </style>
-        
