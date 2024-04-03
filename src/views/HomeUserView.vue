@@ -178,7 +178,7 @@ import { useUserStore } from '@/stores/user'
           },
           logout(){
               this.userStore.removeToken()
-              this.$router.push('/login')
+              this.$router.push('/')
           },
 
 

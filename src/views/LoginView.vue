@@ -48,7 +48,8 @@ import axios from 'axios'
           formData: {
             username: '',
             password: ''
-          }
+          },
+          role: ''
         }
       },
 
@@ -78,7 +79,16 @@ import axios from 'axios'
                 this.userStore.setUserInfo(response.data)
                 console.log(response.data)
                 console.log(localStorage.getItem('user.fname'))
-                this.$router.push('/home')
+                this.role = localStorage.getItem('user.role')
+
+                if(this.role === "user"){
+                  this.$router.push('/home/user')
+                }else{
+                  if(this.role === "admin"){
+                    this.$router.push('/home/admin')
+                  }else{this.$router.push('/home/driver')
+                }
+                }
               })
               .catch((error) => {
                 console.log('error', error)
