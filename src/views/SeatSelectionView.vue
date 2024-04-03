@@ -35,11 +35,13 @@
       <!--Tab menu-->
       <div class="padding-pd"></div>
 
+      
       <div class="seat-container1">
-        <div>{{  addRoutes.id }}</div>
-        <div>{{  addRoutes.date }}</div>
-        <div>{{  addRoutes.time }}</div>
-        <!-- <div>{{  addRoutes.startRoute_id.name }} - {{  addRoutes.endRoute_id.name }}</div> -->
+        <div class="seat-text">เลขที่รอบรถ : {{  addRoutes.id }}</div>
+        <!--<div class="seat-text2">{{  addRoutes.startRoute_id.name }} - {{  addRoutes.endRoute_id.name }}</div>-->
+        <div class="seat-text">วันที่ : {{  addRoutes.date }}</div>
+        <div class="seat-text">เวลา : {{  addRoutes.time }}</div>
+        
         <!-- <table v-for="item in tickets" :value="item" :key="item">
           <tr>
             <td rowspan="2">{{ item.add_route_id.car_id.no }}</td>

@@ -493,6 +493,18 @@ import axios from 'axios'
 /* \Reserve */
 
 /* Seat */
+.seat-container1 {
+    background-color: #eaeaea;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 1% 35%;
+}
+.seat-text {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
 .seat-container2 {
   display: grid;
   grid-template-columns: repeat(6, 1fr); /* 4 คอลัมน์ */
