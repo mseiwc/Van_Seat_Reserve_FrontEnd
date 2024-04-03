@@ -193,7 +193,7 @@ import axios from 'axios'
   box-sizing: border-box;
   color: #ffffff;
   background-color: #0965A7;
-  padding: 13px;
+  padding: 15px;
   margin: 1%;
   width: calc(20% - 20px);
 }
@@ -288,6 +288,15 @@ import axios from 'axios'
     width: 20px; 
     height: auto;
 }
+.btn-delete-route {
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #FF3131;
+    padding: 15px;
+}
 /* \Profile */
 
 /* ช่อง Search */
@@ -295,8 +304,40 @@ import axios from 'axios'
   width: 4%;
   margin: 1% 0%;
 }
-
-
+.select-route-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.select-route-input form {
+  display: flex;
+  align-items: center;
+  width: 80%;
+}
+.select-route-input select,
+.select-route-input input{
+  border-radius: 50px;
+  border: 1px solid #eee;
+  padding: 10px;
+  transition: .3s border-color;
+  width: 100%;
+  margin: 10px;
+  text-align: center;
+}
+.select-route-input select:hover,
+.select-route-input input:hover{
+  border: 1px solid #aaa;
+}
+.btn-select {
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #0965A7;
+    padding: 15px;
+    width: calc(50% - 20px);
+}
 /* \ช่อง Search */
 
 /* ตาราง */
@@ -342,6 +383,7 @@ import axios from 'axios'
   border: 1px solid #ccc;
   border-radius: 50px;
 }
+
 /* \Add Route */
 
 /* Payment */
@@ -375,7 +417,7 @@ import axios from 'axios'
   box-sizing: border-box;
   color: #ffffff;
   background-color: #0965A7;
-  padding: 13px;
+  padding: 15px;
   width: calc(10% - 20px);
   margin-right: 10%;
 }
@@ -386,23 +428,11 @@ import axios from 'axios'
   box-sizing: border-box;
   color: #ffffff;
   background-color: #BABABA;
-  padding: 13px;
+  padding: 15px;
   width: calc(10% - 20px);
   margin-left: 10%;
 }
 /* \ปุ่มย้อนกลับ-ยืนยัน */
-
-.btn-addroute {
-    border-radius: 50px;
-    border-style: none;
-    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
-    box-sizing: border-box;
-    color: #ffffff;
-    background-color: #0965A7;
-    padding: 13px;
-    width: calc(10% - 20px);
-    margin: 3% 0% 0% 90%;
-}
 /* \Payment */
 
 /* Reserve */
@@ -436,7 +466,7 @@ import axios from 'axios'
   
 }
 
-.reserve-input, #reserveInput {
+.reserve-input {
   padding: 10px;
   width: 20%;
   text-align: center;
@@ -445,8 +475,19 @@ import axios from 'axios'
   border: 1px solid #eee;
   transition: .3s border-color;
 }
-.reserve-input:hover, #reserveInput:hover {
+.reserve-input:hover {
   border: 1px solid #aaa;
+}
+.btn-select-reserve {
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #0965A7;
+    padding: 15px;
+    margin: 10px;
+    width: calc(10% - 20px);
 }
 /* \Reserve */
 
@@ -475,7 +516,7 @@ import axios from 'axios'
 .btn-driver{
   background-color: #EAEAEA;
 }
-/* \Server */
+/* \Seat */
 
 /* Confirm Reserve */
 .confirm {
