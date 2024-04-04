@@ -68,7 +68,7 @@
                 <td>{{ item.add_route_id.time }}</td>
                 <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
                 <td>{{ item.add_route_id.car_id.no }}</td>
-                <td>{{ item.seat }}</td>
+                <td>{{ item.seat_id.no }}</td>
                 
             </tr>
         </tbody>
