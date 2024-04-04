@@ -7,24 +7,41 @@
         <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
           <a href="http://localhost:5173/home/user" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
           <a href="http://localhost:5173/reserve" class="btn btn-primary mr-4" style="color: white;">จองที่นั่ง</a>
-          <a href="http://localhost:5173/payment" class="btn btn-primary mr-4" style="color: white;">ชำระเงิน</a>
+          <a href="http://localhost:5173/paymentlist" class="btn btn-primary mr-4" style="color: white;">ชำระเงิน</a>
           <a href="http://localhost:5173/checkpaymentuser" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
         </div>
-        <button class="btn-profile">
-        <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
-          <path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd">
-          </path>
-        </svg>
-      </button>
+        
+        <v-row>
+          <v-col cols="12" offset-sm="3" sm="6" >
+            
+                <v-menu>
+                  <template v-slot:activator="{ props }">
+                    <v-btn icon="mdi-dots-vertical" v-bind="props">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                      <path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"></path>
+                      </svg>
+                    </v-btn>
+                  </template>
+
+                  <v-list>
+                      <v-list-item-title><v-btn @click="logout">ออกจากระบบ</v-btn></v-list-item-title>
+                  </v-list>
+                </v-menu>
+
+          </v-col>
+        </v-row>
+
       </div>
       <!--Tab menu-->
       <div class="padding-pd"></div>
 
+      
       <div class="seat-container1">
-        <div>{{  addRoutes.id }}</div>
-        <div>{{  addRoutes.date }}</div>
-        <div>{{  addRoutes.time }}</div>
-        <!-- <div>{{  addRoutes.startRoute_id.name }} - {{  addRoutes.endRoute_id.name }}</div> -->
+        <div class="seat-text">เลขที่รอบรถ : {{  addRoutes.id }}</div>
+        <!--<div class="seat-text2">{{  addRoutes.startRoute_id.name }} - {{  addRoutes.endRoute_id.name }}</div>-->
+        <div class="seat-text">วันที่ : {{  addRoutes.date }}</div>
+        <div class="seat-text">เวลา : {{  addRoutes.time }}</div>
+        
         <!-- <table v-for="item in tickets" :value="item" :key="item">
           <tr>
             <td rowspan="2">{{ item.add_route_id.car_id.no }}</td>
@@ -65,14 +82,46 @@
       
       <div class="padding-pd"></div>
       <div class="padding-pd"></div>
+
+      <v-row>
+        <v-col cols="12" col="6">
+      <v-menu>
+        <template v-slot:activator="{ props }">
+          <v-btn style="width: 20%; margin: 2% 75%;" v-bind="props" text>เลือกที่นั่ง</v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 1</v-btn>  </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 2</v-btn> </v-list-item-title> 
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 3</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 4</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 5</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 6</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 7</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 8</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 9</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 10</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 11</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 12</v-btn> </v-list-item-title>
+          <v-list-item-title> <v-btn @click="displayText('สถานะที่นั่ง :')" style="background-color: transparent; box-shadow: none; width: 100%;">ที่นั่ง 13</v-btn> </v-list-item-title>
+        </v-list>
+      </v-menu>
+      </v-col>
+      </v-row>
+      <div v-if="displayedText !== 'กหฟก'">
+        <p style="margin: 0% 0% 2% 75%; width: 100%;">{{ displayedText }}</p>
+      </div>
+
       <div class="button-container">
         <button class="btn-back">ย้อนกลับ</button>
         <button class="btn-confirm">จองที่นั่ง</button>
       </div>
   
+      
+
       <div class="padding-pd"></div>
   </body>
-  
+
 </template>
     
     
@@ -85,7 +134,7 @@ import axios from 'axios'
           selectedAddroute:[],
           addRouteId: '',
           addRoutes: [],
-          
+          displayedText: '',
 
         }
       },
@@ -118,7 +167,15 @@ import axios from 'axios'
         selectSeat(seatNumber) {
           console.log('Selected seat:', seatNumber);
           // ทำอย่างอื่น ๆ ที่คุณต้องการให้เกิดขึ้นเมื่อเลือกที่นั่ง
-        }
+        },
+
+        displayText(text) {
+          this.displayedText = text;
+        },
+        logout(){
+              this.userStore.removeToken()
+              this.$router.push('/')
+         },
         
       }
 }  

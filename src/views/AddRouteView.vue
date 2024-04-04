@@ -11,12 +11,27 @@
         <a href="http://localhost:5173/addcar" class="btn btn-primary mr-4" style="color: white;">เพิ่มคนขับรถ</a>
         <a href="http://localhost:5173/checkpaymentadmin" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
-      <button class="btn-profile">
-      <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
-        <path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd">
-        </path>
-      </svg>
-    </button>
+      
+      <v-row>
+          <v-col cols="12" offset-sm="3" sm="6" >
+            
+                <v-menu>
+                  <template v-slot:activator="{ props }">
+                    <v-btn icon="mdi-dots-vertical" v-bind="props">
+                      <svg fill="currentColor" viewBox="0 0 20 20" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg">
+                      <path clip-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" fill-rule="evenodd"></path>
+                      </svg>
+                    </v-btn>
+                  </template>
+
+                  <v-list>
+                      <v-list-item-title><v-btn @click="logout">ออกจากระบบ</v-btn></v-list-item-title>
+                  </v-list>
+                </v-menu>
+
+          </v-col>
+        </v-row>
+        
     </div>
     <!--Tab menu-->
     <div class="padding-pd"></div>
@@ -171,7 +186,11 @@ import axios from 'axios'
             .catch((error)=>{
               console.log('error', error)
             })
-        }
+        },
+        logout(){
+              this.userStore.removeToken()
+              this.$router.push('/')
+        },
       }
     }      
 
