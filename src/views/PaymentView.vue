@@ -94,7 +94,7 @@ export default {
     async fetchTicketID(){
 
       await axios
-      .get(`/tickets/?ticketId=${this.ticketId}`)
+      .get(`/tickets/?id=${this.ticketId}`)
       .then(response => {
           // console.log(response.data)
           this.routes = response.data
