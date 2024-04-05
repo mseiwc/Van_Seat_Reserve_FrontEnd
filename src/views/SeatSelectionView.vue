@@ -120,10 +120,12 @@
       <div class="button-container">
         <button class="btn-back">ย้อนกลับ</button>
         <v-row>
-        <v-col cols="12" col="6">
+        <v-col cols="12" col="12">
           <v-dialog v-model="dialog" max-width="400" persistent>
             <template v-slot:activator="{ on }">
-              <v-btn class="btn-confirm" @click="dialog = seatStatus === 'available'"  text style="width: 20%; margin: 2% 75%;">จองที่นั่ง</v-btn>
+              <v-btn class="btn-confirm" @click="dialog = seatStatus === 'available'"  text style="border-radius: 50px; border-style: none; 
+              box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0; box-sizing: border-box;
+              color: #ffffff; background-color: #0965A7; padding: 18px; width: calc(12% - 20px); margin: 0% 75%; height: inherit;">จองที่นั่ง</v-btn>
             </template>
 
             <v-card text="" title="ยืนยันการจองที่นั่ง">
@@ -151,6 +153,7 @@
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { RouterLink } from 'vue-router';
+
     export default  {
       setup() {
         const userStore = useUserStore()

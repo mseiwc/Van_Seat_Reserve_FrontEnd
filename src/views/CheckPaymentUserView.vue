@@ -59,16 +59,23 @@
 </template>
 
 <script>
+import { useUserStore } from '@/stores/user'
 export default  {
+  setup() {
+        const userStore = useUserStore()
+        return {
+          userStore
+        }
+      },
 
-      // debug methods
-      methods: {
-        logout(){
-              this.userStore.removeToken()
-              this.$router.push('/')
-        },
-      }
-} 
+// debug methods
+methods: {
+  logout(){
+        this.userStore.removeToken()
+        this.$router.push('/')
+  },
+  }
+}     
 </script>
 
 <style>

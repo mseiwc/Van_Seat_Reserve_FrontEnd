@@ -60,8 +60,16 @@
 </template>
 
 <script>
-export default  {
+import { useUserStore } from '@/stores/user'
 
+export default  {
+  setup() {
+        const userStore = useUserStore()
+        return {
+          userStore
+        }
+      },
+      
       // debug methods
       methods: {
         logout(){

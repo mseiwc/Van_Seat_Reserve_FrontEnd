@@ -6,7 +6,7 @@
       <img src="../views/img/Logo.png" class="logo-img">
       <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
         <a href="http://localhost:5173/home/admin" class="btn btn-primary mr-4" style="color: white;">หน้าแรก</a>
-        <a href="http://localhost:5173/route" class="btn btn-primary mr-4" style="color: white;">เพิ่มเส้นทาง</a>
+        <a href="http://localhost:5173/route" class="btn btn-primary mr-4" style="color: white;">เพิ่มสถานที่</a>
         <a href="http://localhost:5173/addroute" class="btn btn-primary mr-4" style="color: white;">เพิ่มรอบรถ</a>
         <a href="http://localhost:5173/addcar" class="btn btn-primary mr-4" style="color: white;">เพิ่มคนขับรถ</a>
         <a href="http://localhost:5173/checkpaymentadmin" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
@@ -37,7 +37,7 @@
     <div class="padding-pd"></div>
     
     <div class="menu-align2">
-      <h3>เพิ่มเส้นทาง</h3>
+      <h3>เพิ่มสถานที่</h3>
     </div>
 
     <title>Add Route Form</title>
@@ -46,7 +46,7 @@
 
 
         <!--แก้เลขที่รถ -> gen โดยระบบ-->
-        <label for="name">เส้นทาง</label><br />
+        <label for="name">สถานที่</label><br />
         <input type="text" v-model="routeData.name" placeholder="" ><br />
       
     </div>
@@ -64,7 +64,15 @@
   
 <script>
 import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+
     export default  {
+      setup() {
+        const userStore = useUserStore()
+        return {
+          userStore
+        }
+      },
       data() {
         return {
           routeData: {

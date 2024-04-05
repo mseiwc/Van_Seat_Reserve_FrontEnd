@@ -57,12 +57,23 @@
         <button class="btn-select-reserve" >ค้นหาเส้นทาง</button>
         </form>
 
-        <table>
+        <table id="UserTable" style="margin-top: 2%">
+          <thead>
+              <tr>
+                  <th>เลขที่รถ</th>
+                  <th>เส้นทาง</th>
+                  <th>วันที่</th>
+                  <th>เวลา</th>
+                  <th>สถานะที่นั่ง</th>
+                  <th>ราคา</th>
+                  <th>จองที่นั่ง</th>
+              </tr>
+          </thead>
           <tbody>
             <tr v-for="item in searchs" :value="item" :key="item">
               <td>{{ item.car_id.no }}</td>
-              <td>{{ item.startRoute_id.name }}</td>
-              <td>{{ item.endRoute_id.name }}</td>
+              <td>{{ item.startRoute_id.name }} - {{ item.endRoute_id.name }}</td>
+              <td>{{ item.date }}</td>
               <td>{{ item.time }}</td>
               <td>{{ item.status }}</td>
               <td>{{ item.price }}</td>
@@ -85,7 +96,15 @@
 <script>
 import axios from 'axios'
 import { RouterLink } from 'vue-router';
+import { useUserStore } from '@/stores/user'
+
     export default  {
+      setup() {
+        const userStore = useUserStore()
+        return {
+          userStore
+        }
+      },
       data() {
         return {
           routeData: {

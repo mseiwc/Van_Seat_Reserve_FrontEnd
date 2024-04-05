@@ -34,6 +34,14 @@
     </div>
     <!--Tab menu-->
     <div class="padding-pd"></div>
+
+    <div class="seat-container1">
+      <div class="seat-text">เลขที่รอบรถ : {{  addRouteId }}</div>
+      <div class="seat-text">เลขที่นั่ง : {{  item }}</div>  <!-- seat no  จากหน้า SeatSelectionView > /select/seat -->
+      <div class="seat-text">{{ startRouteName }} - {{ endRouteName }}</div>
+      <div class="seat-text">วันที่ : {{ date }}</div>
+      <div class="seat-text">เวลา : {{  time }}</div>
+    </div>
   
     <div class="menu-align2">
       <h3>Scan QR Code</h3>
@@ -41,15 +49,11 @@
       <h4>โปรดสแกนคิวอาร์โค้ดเพื่อชำระเงิน</h4>
     </div>
 
-    <div class="img-file">
-      <label for="imgFile" class="img">เพิ่มหลักฐานการโอนเงิน</label>
-      <input type="file" @change="handleFileChange" id="imgFile" accept="image/*">
-    </div>
     
     <!--ส่งข้อมูลไปให้ Admin ยืนยัน-->
     <div class="button-container">
       <button class="btn-back">ย้อนกลับ</button>
-      <button class="btn-confirm" @click="sendImg">ชำระเงินสำเร็จ</button>
+      <button class="btn-confirm">ชำระเงินสำเร็จ</button>
     </div>
     
 
@@ -60,11 +64,18 @@
   
 <script>
 import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+
 export default {
+  setup() {
+        const userStore = useUserStore()
+        return {
+          userStore
+        }
+      },
   data() {
     return {
       imgData: {
-        img: null
       },
       ticketId: '',
     };
@@ -74,33 +85,29 @@ export default {
     // เมื่อหน้านี้ถูกสร้างขึ้น ให้ดึงค่า itemId จาก Vue Router
     this.ticketId = this.$route.params.itemId
   },
-  methods: {
-    handleFileChange(event) {
-      const file = event.target.files[0];
-      if (file) {
-        this.imgData.img = file;
-        this.uploadFile(file);
-      }
-    },
-    uploadFile(file) {
-      const formData = new FormData();
-      formData.append('file', file);
 
-      // Send the file to your Django server
-      axios.post('/api/upload/', formData)
-        .then(response => {
-          console.log('File uploaded successfully');
-          // Handle the response from the server if needed
-        })
-        .catch(error => {
-          console.error('Error uploading file:', error);
-          // Handle the error if the upload fails
-        });
+  async mounted() {
+        await this.fetchTicketID()
+  },
+   
+  methods: {
+    async fetchTicketID(){
+
+      await axios
+      .get(`/tickets/?ticketId=${this.ticketId}`)
+      .then(response => {
+          // console.log(response.data)
+          this.routes = response.data
+
+        }
+      ).catch(error => {
+      })
+
     },
     logout(){
               this.userStore.removeToken()
               this.$router.push('/')
-         },
+    },
   }
 }
 </script>
