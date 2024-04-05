@@ -411,6 +411,11 @@ import axios from 'axios'
   display: flex;
   justify-content: space-between;
 }
+.button-container2 {
+  display: flex;
+  justify-content: space-between;
+  margin: 10% 0%;
+}
 .btn-confirm {
   border-radius: 50px;
   border-style: none;
@@ -422,6 +427,17 @@ import axios from 'axios'
   width: calc(10% - 20px);
   margin-right: 10%;
 }
+.btn-confirm2 {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #0965A7;
+  padding: 15px;
+  width: calc(40% - 20px);
+  margin-right: 10%;
+}
 .btn-back {
   border-radius: 50px;
   border-style: none;
@@ -431,6 +447,17 @@ import axios from 'axios'
   background-color: #BABABA;
   padding: 15px;
   width: calc(10% - 20px);
+  margin-left: 10%;
+}
+.btn-back2 {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #BABABA;
+  padding: 15px;
+  width: calc(40% - 20px);
   margin-left: 10%;
 }
 /* \ปุ่มย้อนกลับ-ยืนยัน */

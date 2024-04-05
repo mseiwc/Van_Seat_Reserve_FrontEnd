@@ -67,7 +67,7 @@
               <td>{{ item.status }}</td>
               <td>{{ item.price }}</td>
               <td>
-                <button class="btn-reserve-table" @click.prevent="submitReserve(item)">
+                <button class="btn-reserve-table">
                 <RouterLink :to="{ name: 'selectionSeat', params: { itemId: item.id } }">จองที่นั่ง</RouterLink>
                 </button>
               </td>
@@ -75,7 +75,6 @@
           </tbody>
         </table>
         </div>
-
 
       <div class="padding-pd"></div>
   </body>

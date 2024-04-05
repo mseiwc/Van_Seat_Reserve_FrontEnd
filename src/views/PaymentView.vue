@@ -65,8 +65,14 @@ export default {
     return {
       imgData: {
         img: null
-      }
+      },
+      ticketId: '',
     };
+  },
+  props: ['itemId'],
+  created() {
+    // เมื่อหน้านี้ถูกสร้างขึ้น ให้ดึงค่า itemId จาก Vue Router
+    this.ticketId = this.$route.params.itemId
   },
   methods: {
     handleFileChange(event) {

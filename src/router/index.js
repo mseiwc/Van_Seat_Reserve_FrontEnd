@@ -69,9 +69,10 @@ const router = createRouter({
       component: ConfirmReserveView
     },
     {
-      path: '/payment',
+      path: '/payment/:itemId',
       name: 'payment',
-      component: PaymentView
+      component: PaymentView,
+      props: true // ทำให้ Vue Router ส่งพารามิเตอร์เป็น props ไปยัง component
     },
     {
       path: '/paymentlist',

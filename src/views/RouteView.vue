@@ -52,7 +52,7 @@
     </div>
     
     <div class="button-container">
-      <button class="btn-back">ย้อนกลับ</button>
+      <button class="btn-back"><router-link to="/home/admin">ย้อนกลับ</router-link></button>
       <button class="btn-confirm">ยืนยัน</button>
     </div>
   </form>

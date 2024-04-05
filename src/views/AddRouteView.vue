@@ -71,9 +71,9 @@
           <option v-for="item in drivers" :value="item.id" :key="item">{{ item.firstName }} {{ item.lastName }}</option>
         </select><br />
 
-        <div class="button-container">
-          <button class="btn-back"><router-link to="/home/admin">ย้อนกลับ</router-link></button>
-          <button class="btn-confirm">ยืนยัน</button>
+        <div class="button-container2">
+          <button class="btn-back2"><router-link to="/home/admin">ย้อนกลับ</router-link></button>
+          <button class="btn-confirm2">ยืนยัน</button>
         </div>
       </form>
     </div>
