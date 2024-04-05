@@ -36,11 +36,11 @@
     <div class="padding-pd"></div>
 
     <div class="seat-container1">
-      <div class="seat-text">เลขที่รอบรถ : {{  addRouteId }}</div>
-      <div class="seat-text">เลขที่นั่ง : {{  item }}</div>  <!-- seat no  จากหน้า SeatSelectionView > /select/seat -->
-      <div class="seat-text">{{ startRouteName }} - {{ endRouteName }}</div>
-      <div class="seat-text">วันที่ : {{ date }}</div>
-      <div class="seat-text">เวลา : {{  time }}</div>
+      <div class="seat-text">เลขที่รถ : {{  tickets.car_id.id }}</div>
+      <div class="seat-text">เลขที่นั่ง : {{  tickets.seat_id.no }}</div>  <!-- seat no  จากหน้า SeatSelectionView > /select/seat -->
+      <div class="seat-text">{{ tickets.add_route_id.startRoute_id.name }} - {{ tickets.add_route_id.endRoute_id.name }}</div>
+      <div class="seat-text">วันที่ : {{ tickets.add_route_id.date }}</div>
+      <div class="seat-text">เวลา : {{ tickets.add_route_id.time }}</div>
     </div>
   
     <div class="menu-align2">
@@ -78,6 +78,7 @@ export default {
       imgData: {
       },
       ticketId: '',
+      tickets: [],
     };
   },
   props: ['itemId'],
@@ -97,7 +98,7 @@ export default {
       .get(`/tickets/?id=${this.ticketId}`)
       .then(response => {
           // console.log(response.data)
-          this.routes = response.data
+          this.tickets = response.data
 
         }
       ).catch(error => {
