@@ -5,7 +5,7 @@
    <div class="tab-menu" style="background-color: #4EA7DB;display: grid; grid-template-columns: 3fr 10fr;align-items: center;justify-items: end;">
     <img src="../views/img/Logo.png" class="logo-img">
     <div class="tab-menu-block" style="padding: 1%;">
-      <a href="http://localhost:5173/signup" class="btn btn-primary mr-4" style="color: white;">สร้างบัญชีผู้ใช้</a>
+      <a href="http://localhost:5173/signup" class="btn btn-primary mr-4" style="color: white;">สร้างบัญชี</a>
       <a href="http://localhost:5173/login" class="btn btn-secondary" style="color: white;">เข้าสู่ระบบ</a>
     </div>
   </div>

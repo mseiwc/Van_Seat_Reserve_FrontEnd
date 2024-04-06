@@ -3,7 +3,7 @@
   <div class="tab-menu" style="background-color: #4EA7DB;display: grid; grid-template-columns: 3fr 10fr;align-items: center;justify-items: end;margin-left;: 3%">
     <img src="../views/img/Logo.png" class="logo-img">
     <div class="tab-menu-block" style="padding: 1%;">
-      <a href="http://localhost:5173/signup" class="btn btn-primary mr-4" style="color: white;">สร้างบัญชีผู้ใช้</a>
+      <a href="http://localhost:5173/signup" class="btn btn-primary mr-4" style="color: white;">สร้างบัญชี</a>
       <a href="http://localhost:5173/login" class="btn btn-secondary" style="color: white;">เข้าสู่ระบบ</a>
     </div>
   </div>
@@ -11,7 +11,7 @@
   <div class="padding-pd"></div>
   <title>Signup Form</title>
   <div class="signup-form" style="text-align: left;">
-    <h3 style="margin: 2% 4%;">สร้างบัญชีผู้ใช้</h3>
+    <h3 style="margin: 2% 4%;">สร้างบัญชี</h3>
     <form action="#" @submit.prevent="submitSignupForm">
       
     <v-container>
@@ -234,10 +234,11 @@ import axios from 'axios'
     border-style: none;
     box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
     box-sizing: border-box;
-    color: #3c4043;
     padding: 1%;
     margin: 2% 3%;
     width: 8%;
+    color: #ffffff;
+    background-color: #0965A7;
 }
 .signup {
     margin-left: 2%;
@@ -485,7 +486,7 @@ import axios from 'axios'
     color: #ffffff;
     background-color: #0965A7;
     padding: 15px;
-    width: 50%;
+    width: 80%;
 }
 .reserve {
   display: flex;
@@ -515,7 +516,7 @@ import axios from 'axios'
     background-color: #0965A7;
     padding: 15px;
     margin: 10px;
-    width: calc(10% - 20px);
+    width: calc(12% - 20px);
 }
 /* \Reserve */
 
