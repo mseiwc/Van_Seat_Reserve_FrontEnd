@@ -60,7 +60,7 @@
 
     <div class="signup">
       <span class="signup">คุณมีบัญชีอยู่แล้ว?
-        <button class="btn-login" @click="login">เข้าสู่ระบบ</button>
+        <router-link to="/login"><button class="btn-login">เข้าสู่ระบบ</button></router-link>
       </span>
     </div>
   </div>
