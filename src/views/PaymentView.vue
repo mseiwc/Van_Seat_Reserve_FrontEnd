@@ -36,11 +36,11 @@
     <div class="padding-pd"></div>
 
     <div class="seat-container1">
-      <div class="seat-text">เลขที่รถ : {{  tickets.car_id.id }}</div>
-      <div class="seat-text">เลขที่นั่ง : {{  tickets.seat_id.no }}</div>  <!-- seat no  จากหน้า SeatSelectionView > /select/seat -->
-      <div class="seat-text">{{ tickets.add_route_id.startRoute_id.name }} - {{ tickets.add_route_id.endRoute_id.name }}</div>
-      <div class="seat-text">วันที่ : {{ tickets.add_route_id.date }}</div>
-      <div class="seat-text">เวลา : {{ tickets.add_route_id.time }}</div>
+      <div class="seat-text">เลขที่รถ : {{  carNo }}</div>
+      <div class="seat-text">เลขที่นั่ง : {{  seatNo }}</div>
+      <div class="seat-text">{{ startRoute }} - {{ endRoute }}</div>
+      <div class="seat-text">วันที่ : {{ date }}</div>
+      <div class="seat-text">เวลา : {{ time }}</div>
     </div>
   
     <div class="menu-align2">
@@ -79,6 +79,16 @@ export default {
       },
       ticketId: '',
       tickets: [],
+
+      // display
+      carNo: '',
+      seatNo: '',
+      startRoute: '',
+      endRoute: '',
+      time: '',
+      date: ''
+
+
     };
   },
   props: ['itemId'],
@@ -97,8 +107,17 @@ export default {
       await axios
       .get(`/tickets/?id=${this.ticketId}`)
       .then(response => {
-          // console.log(response.data)
-          this.tickets = response.data
+          console.log(response.data)
+          this.tickets = response.data[0]
+          this.carNo = response.data[0].add_route_id.car_id.no
+          this.seatNo = response.data[0].seat_id.no
+          this.startRoute = response.data[0].add_route_id.startRoute_id.name
+          this.endRoute = response.data[0].add_route_id.endRoute_id.name
+          this.date = response.data[0].add_route_id.date
+          this.time = response.data[0].add_route_id.time
+
+
+
 
         }
       ).catch(error => {

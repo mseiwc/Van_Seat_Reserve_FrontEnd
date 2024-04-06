@@ -37,7 +37,7 @@
 
       
       <div class="seat-container1">
-        <div class="seat-text">เลขที่รอบรถ : {{  addRouteId }}</div>
+        <div class="seat-text">เลขที่รถ : {{ carNo }}</div>
         <div class="seat-text">{{ startRouteName }} - {{ endRouteName }}</div>
         <div class="seat-text">วันที่ : {{ date }}</div>
         <div class="seat-text">เวลา : {{  time }}</div>
@@ -179,6 +179,7 @@ import { RouterLink } from 'vue-router';
           displayedText: '',
           car: '',
           carId: '',
+          carNo: '',
 
           seat: [],
           ticketId: '',
@@ -281,6 +282,7 @@ import { RouterLink } from 'vue-router';
 
               this.car = this.addRoutes.car
               this.carId = response.data.car
+              this.carNo = response.data.car_id.no
               
               // playload ticket
               this.ticket.add_route = response.data.id
