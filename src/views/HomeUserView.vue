@@ -55,21 +55,24 @@
     <table id="UserTable">
         <thead>
             <tr>
-                <th>วันที่</th>
-                <th>เวลา</th>
-                <th>เส้นทาง</th>
+                <th>เลขที่ตั๋ว</th>
                 <th>เลขที่รถ</th>
                 <th>เลขที่นั่ง</th>
+                <th>เส้นทาง</th>
+                <th>วันที่</th>
+                <th>เวลา</th>
+                <th>รายละเอียด</th>
             </tr>
         </thead>
         <tbody>
             <tr v-for="item in searchs" :value="item" :key="item">
-                <td>{{ item.add_route_id.date }}</td>
-                <td>{{ item.add_route_id.time }}</td>
-                <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
+                <td>{{ item.id }}</td>
                 <td>{{ item.add_route_id.car_id.no }}</td>
                 <td>{{ item.seat_id.no }}</td>
-                
+                <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
+                <td>{{ item.add_route_id.date }}</td>
+                <td>{{ item.add_route_id.time }}</td>
+                <td><button class="btn-detail" @click.prevent="">รายละเอียด</button></td>
             </tr>
         </tbody>
     </table>

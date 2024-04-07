@@ -9,7 +9,7 @@
         <a href="http://localhost:5173/route" class="btn btn-primary mr-4" style="color: white;">เพิ่มสถานที่</a>
         <a href="http://localhost:5173/addroute" class="btn btn-primary mr-4" style="color: white;">เพิ่มรอบรถ</a>
         <a href="http://localhost:5173/addcar" class="btn btn-primary mr-4" style="color: white;">เพิ่มคนขับรถ</a>
-        <a href="http://localhost:5173/resetseat" class="btn btn-primary mr-4" style="color: white;">resetseat</a>
+        <a href="http://localhost:5173/resetseat" class="btn btn-primary mr-4" style="color: white;">รีเซ็ตที่นั่ง</a>
         <a href="http://localhost:5173/checkpaymentadmin" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
       

@@ -45,8 +45,8 @@
             <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
             <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
             <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
-            <div class="ticket-status" v-if="item.status === 'unpaid'">ยังไม่จ่าย</div>
-            <div class="ticket-status" v-if="item.status === 'paid'">จ่ายแล้ว</div>
+            <div class="ticket-status" v-if="item.status === 'unpaid'" style="color: #ff0000">ยังไม่ได้ชำระเงิน</div>
+            <div class="ticket-status" v-if="item.status === 'paid'" style="color: rgb(40 151 21);">ชำระเงินแล้ว</div>
           </div>
 
     </div>

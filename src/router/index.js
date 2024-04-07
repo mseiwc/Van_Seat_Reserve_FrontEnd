@@ -6,6 +6,7 @@ import HomeUserView from '../views/HomeUserView.vue'
 import ConfirmReserveView from '../views/ConfirmReserveView.vue'
 import PaymentView from '../views/PaymentView.vue'
 import CheckPaymentUserView from '../views/CheckPaymentUserView.vue'
+import TicketDetailView from '../views/TicketDetailView.vue'
 
 
 import HomeAdminView from '../views/HomeAdminView.vue'
@@ -109,6 +110,11 @@ const router = createRouter({
       path: '/resetseat',
       name: 'resetseat',
       component: ResetSeatView
+    },
+    {
+      path: '/ticketdetail',
+      name: 'ticketdetail',
+      component: TicketDetailView
     },
   ]
 })

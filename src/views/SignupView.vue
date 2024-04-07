@@ -590,7 +590,6 @@ import axios from 'axios'
 }
 
 .ticket-status {
-  color: #ff0000;
   text-align: right;
   font-size: 20px;
 }
@@ -609,4 +608,16 @@ import axios from 'axios'
     width: 20%;
 }
 /*  \Payment List */
+
+/*  Reset Seat */
+.btn-resetseat, .btn-detail{
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #0965A7;
+    padding: 15px;
+}
+/*  \Reset Seat */
 </style>
