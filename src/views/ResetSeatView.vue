@@ -9,7 +9,7 @@
         <a href="http://localhost:5173/route" class="btn btn-primary mr-4" style="color: white;">เพิ่มสถานที่</a>
         <a href="http://localhost:5173/addroute" class="btn btn-primary mr-4" style="color: white;">เพิ่มรอบรถ</a>
         <a href="http://localhost:5173/addcar" class="btn btn-primary mr-4" style="color: white;">เพิ่มคนขับรถ</a>
-        <a href="http://localhost:5173/resetseat" class="btn btn-primary mr-4" style="color: white;">resetseat</a>
+        <a href="http://localhost:5173/resetseat" class="btn btn-primary mr-4" style="color: white;">รีเซ็ต</a>
         <a href="http://localhost:5173/checkpaymentadmin" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
       
@@ -46,7 +46,7 @@
                 <th>เส้นทาง</th>
                 <th>วันที่</th>
                 <th>เวลา</th>
-                <th>resetseat</th>
+                <th>รีเซ็ตที่นั่ง</th>
             </tr>
         </thead>
         <tbody>
@@ -56,7 +56,7 @@
                 <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
                 <td>{{ item.add_route_id.date }}</td>
                 <td>{{ item.add_route_id.time }}</td>
-                <td><button class="btn-resetseat" @click.prevent="resetSeat(item.seat_id.id)">resetseat</button></td>
+                <td><button class="btn-resetseat" @click.prevent="resetSeat(item.seat_id.id)">รีเซ็ต</button></td>
                 
             </tr>
         </tbody>
