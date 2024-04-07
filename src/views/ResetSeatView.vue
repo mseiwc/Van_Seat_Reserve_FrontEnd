@@ -57,7 +57,6 @@
                 <td>{{ item.add_route_id.date }}</td>
                 <td>{{ item.add_route_id.time }}</td>
                 <td><button class="btn-resetseat" @click.prevent="resetSeat(item.seat_id.id)">รีเซ็ตที่นั่ง</button></td>
-                
             </tr>
         </tbody>
     </table>

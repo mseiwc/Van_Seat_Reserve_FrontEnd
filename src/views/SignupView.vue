@@ -522,11 +522,10 @@ import axios from 'axios'
 
 /* Seat */
 .seat-container1 {
-    background-color: #eaeaea;
-    border: 2px solid #ccc;
+    background-color: #4ea7db33;
     border-radius: 10px;
     padding: 20px;
-    margin: 1% 35%;
+    margin: 0% 35%;
 }
 .seat-text {
   color: #333;

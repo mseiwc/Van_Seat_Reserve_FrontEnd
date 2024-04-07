@@ -44,7 +44,7 @@
     </div>
   
     <div class="menu-align2">
-      <h3>Scan QR Code</h3>
+      <h3 style="margin-top: 2% !important;">Scan QR Code</h3>
       <img src="../views/img/qr-code.jpg" class="qr-code">
       <h4>โปรดสแกนคิวอาร์โค้ดเพื่อชำระเงิน</h4>
     </div>

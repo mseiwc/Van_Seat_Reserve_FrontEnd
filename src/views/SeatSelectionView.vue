@@ -118,7 +118,7 @@
       </div>
 
       <div class="button-container">
-        <button class="btn-back">ย้อนกลับ</button>
+        <button class="btn-back"><router-link to="/reserve">ย้อนกลับ</router-link></button>
         <v-row>
         <v-col cols="12" col="12">
           <v-dialog v-model="dialog" max-width="400" persistent>
