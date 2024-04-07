@@ -36,31 +36,30 @@
     <!--Tab menu-->
     <div class="padding-pd"></div>
 
-    <div class="container mx-auto max-w-lg">
-      <div class="flex flex-col justify-center items-center">
-        <h1 class="text-2xl font-bold mb-4">ตรวจสอบการชำระเงิน</h1>
-
-        <!-- Ticket List -->
-        <div class="flex flex-col gap-4 w-full">
-          <div v-for="index in 5" :key="index" class="border-2 border-gray-900 p-4 flex justify-between items-center">
-            <div class="ticket-info">
-              เลขที่ตั๋ว Number:
-              <span class="text-blue-900">{{ String(index).padStart(5, "0") }}</span>
-            </div>
-
-            <div class="ticket-status">
-              ชำระเงินแล้ว
-            </div>
-          </div>
-        </div>
-        <!-- Ticket List -->
-
-      </div>
+    <div class="menu-align2">
+        <h3>ตรวจสอบการชำระเงิน</h3>
     </div>
+
+    <div class="payment-container">
+
+          <div v-for="item in tickets" :value="item" :key="item" class="border-2 border-gray-900 p-4" style="margin: 2%;">
+            <div class="ticket-info">เลขที่ตั๋ว : {{ item.id }}</div>
+            <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
+            <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
+            <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
+            <div class="ticket-status" v-if="item.status === 'unpaid'">ยังไม่จ่าย</div>
+            <div class="ticket-status" v-if="item.status === 'paid'">จ่ายแล้ว</div>
+          </div>
+
+    </div>
+
+
+    <div class="padding-pd"></div>
   </body>
 </template>
 
 <script>
+import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 export default  {
   setup() {
@@ -69,9 +68,44 @@ export default  {
           userStore
         }
       },
+      data() {
+        return {
+            tickets:[],
 
+            
+            // userInfo
+            user: [],
+            userId: '',
+          
+        }
+      },
+      async mounted() {
+        await this.fetchTickets()
+      },
 // debug methods
 methods: {
+          // แสดงตารางทั้งหมด
+      async fetchTickets(){
+
+        // get user id # 90
+        this.userStore.initStore()
+        this.user = this.userStore.user
+        // console.log(this.user)
+        this.userId = this.userStore.user.id //user_id
+        // console.log(this.userId)
+
+        await axios
+        .get('/tickets/')
+        .then(response => {
+            console.log(response.data)
+            this.tickets = response.data
+            // this.searchs = response.data
+
+          }
+        ).catch(error => {
+        })
+
+        },
   logout(){
         this.userStore.removeToken()
         this.$router.push('/')
