@@ -38,7 +38,29 @@
     <div class="padding-pd"></div>
     
     
-
+    <table id="UserTable">
+        <thead>
+            <tr>
+                <th>เลขที่รถ</th>
+                <th>เลขที่นั่ง</th>
+                <th>เส้นทาง</th>
+                <th>วันที่</th>
+                <th>เวลา</th>
+                <th>resetseat</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="item in tickets" :value="item" :key="item">
+                <td>{{ item }}</td>
+                <td>{{ item }}</td>
+                <td>{{ item }} - {{ item }}</td>
+                <td>{{ item }}</td>
+                <td>{{ item }}</td>
+                <td>{{ item }}</td>
+                
+            </tr>
+        </tbody>
+    </table>
 
 
 
@@ -65,16 +87,30 @@ import { useUserStore } from '@/stores/user'
       },
       data() {
         return {
-          
+          tickets: [],
         }
+        
       },
       async mounted() {
+        await this.fetchTickets()
 
       },
 
       // debug methods
     methods: {
-   
+      async fetchTickets(){
+
+      await axios
+      .get('/tickets/')
+      .then(response => {
+          console.log(response.data)
+          this.tickets = response.data
+
+        }
+      ).catch(error => {
+      })
+
+      },
       
 
 
