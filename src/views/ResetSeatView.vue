@@ -50,13 +50,13 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="item in tickets" :value="item" :key="item">
-                <td>{{ item }}</td>
-                <td>{{ item }}</td>
-                <td>{{ item }} - {{ item }}</td>
-                <td>{{ item }}</td>
-                <td>{{ item }}</td>
-                <td>{{ item }}</td>
+            <tr v-for="item in sortedTickets" :value="item" :key="item">
+                <td>{{ item.add_route_id.car_id.no }}</td>
+                <td>{{ item.seat_id.no }}</td>
+                <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
+                <td>{{ item.add_route_id.date }}</td>
+                <td>{{ item.add_route_id.time }}</td>
+                <td><button class="btn-resetseat" @click.prevent="resetSeat(item.seat_id.id)">resetseat</button></td>
                 
             </tr>
         </tbody>
@@ -95,13 +95,42 @@ import { useUserStore } from '@/stores/user'
         await this.fetchTickets()
 
       },
-
+      computed: {
+          sortedTickets() {
+              // คัดลอกข้อมูลตั๋วเพื่อไม่ทำให้ข้อมูลเดิมถูกเปลี่ยนแปลง
+              const copiedTickets = [...this.tickets];
+              // เรียงลำดับตั๋วตามเลขที่รถและเลขที่นั่ง
+              return copiedTickets.sort((a, b) => {
+                  // ตัวเลขที่รถ (เป็นตัวเลข)
+                  const carIdA = a.add_route_id.car_id.no;
+                  const carIdB = b.add_route_id.car_id.no;
+                  // เลขที่นั่ง (เป็นตัวเลข)
+                  const seatNoA = a.seat_id.no;
+                  const seatNoB = b.seat_id.no;
+                  // เรียงลำดับตามเลขที่รถ และเมื่อเลขที่รถเท่ากัน จะเรียงตามเลขที่นั่ง
+                  if (carIdA === carIdB) {
+                      return seatNoA - seatNoB;
+                  }
+                  return carIdA - carIdB;
+              });
+          }
+      },
       // debug methods
     methods: {
+      async updateSeatStatus(id, newData) {
+            try {
+              const response = await axios.put(`/seats/${id}/`, newData);
+              console.log(response.data); // แสดงข้อมูลที่ได้รับกลับจาก API
+              return response.data;
+            } catch (error) {
+              console.error('Error updating seat status:', error);
+              throw error;
+            }
+          },
       async fetchTickets(){
 
       await axios
-      .get('/tickets/')
+      .get('tickets_filter/?seat_status=unavailable')
       .then(response => {
           console.log(response.data)
           this.tickets = response.data
@@ -111,14 +140,22 @@ import { useUserStore } from '@/stores/user'
       })
 
       },
-      
-
-
-
       logout(){
               this.userStore.removeToken()
               this.$router.push('/')
       },
+      async resetSeat(seatId){
+
+        console.log(seatId)
+
+        const newData = { status: 'available' }; // ข้อมูลใหม่ที่ต้องการอัปเดต
+        await this.updateSeatStatus(seatId, newData);
+        this.fetchTickets()
+
+
+
+      }
+
 
       }
     }      
