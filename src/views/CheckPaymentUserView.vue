@@ -42,25 +42,22 @@
         <div class="flex flex-col gap-4 w-full">
 
           <div v-for="item in tickets" :value="item" :key="item" class="border-2 border-gray-900 p-4 flex justify-between items-center" >
-            <div class="ticket-info">
-              เลขที่ตั๋ว Number: {{ item.id }}
-              <!-- <span class="text-blue-900">{{ String(index).padStart(5, "0") }}</span> -->
-            </div>
-
-            <div class="ticket-status" v-if="item.status === 'unpaid'">
-            ยังไม่จ่าย
-          </div>
-          <div class="ticket-status" v-if="item.status === 'paid'">
-            จ่ายแล้ว
-          </div>
+            <div class="ticket-info">เลขที่ตั๋ว : {{ item.id }}</div>
+            <div class="ticket-info">เส้นทาง : {{ item.id }}</div>
+            <div class="ticket-info">วันที่ : {{ item.id }}</div>
+            <div class="ticket-info">เวลา : {{ item.id }}</div>
+            <div class="ticket-status" v-if="item.status === 'unpaid'">ยังไม่จ่าย</div>
+            <div class="ticket-status" v-if="item.status === 'paid'">จ่ายแล้ว</div>
           </div>
 
 
         </div>
         <!-- Ticket List -->
-
       </div>
     </div>
+
+
+    <div class="padding-pd"></div>
   </body>
 </template>
 
