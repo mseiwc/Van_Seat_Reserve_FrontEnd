@@ -43,13 +43,12 @@
 
           <div v-for="item in tickets" :value="item" :key="item" class="border-2 border-gray-900 p-4 flex justify-between items-center" >
             <div class="ticket-info">เลขที่ตั๋ว : {{ item.id }}</div>
-            <div class="ticket-info">เส้นทาง : {{ item.id }}</div>
-            <div class="ticket-info">วันที่ : {{ item.id }}</div>
-            <div class="ticket-info">เวลา : {{ item.id }}</div>
+            <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
+            <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
+            <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
             <div class="ticket-status" v-if="item.status === 'unpaid'">ยังไม่จ่าย</div>
             <div class="ticket-status" v-if="item.status === 'paid'">จ่ายแล้ว</div>
           </div>
-
 
         </div>
         <!-- Ticket List -->

@@ -52,7 +52,7 @@
     
     <!--ส่งข้อมูลไปให้ Admin ยืนยัน-->
     <div class="button-container">
-      <button class="btn-back">ย้อนกลับ</button>
+      <button class="btn-back" @click="back">ย้อนกลับ</button>
       <button class="btn-confirm" @click="submitPayment">ชำระเงินสำเร็จ</button>
     </div>
     
@@ -134,6 +134,7 @@ export default {
       const id = this.ticketId; // ID ของที่นั่งที่ต้องการอัปเดต
       const newData = { status: 'paid' }; // ข้อมูลใหม่ที่ต้องการอัปเดต
       await this.updateTicketStatus(id, newData);
+      this.$router.push('/checkpaymentuser')
 
     },
     async updateTicketStatus(id, newData) {
@@ -146,6 +147,10 @@ export default {
               throw error;
             }
           },
+      back(){
+        this.$router.push('/paymentlist')
+
+      }
   }
 }
 </script>
