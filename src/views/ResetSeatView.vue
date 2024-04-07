@@ -1,6 +1,7 @@
 <template>
+
   <body>
-    <!--Tab menu-->
+     <!--Tab menu-->
     <div class="tab-menu" style="background-color: #4EA7DB;display: grid; grid-template-columns: 3fr 10fr 3fr;align-items: center;">
       <img src="../views/img/Logo.png" class="logo-img">
       <div class="tab-menu-block" style="padding: 1%;margin-left: 10%;">
@@ -11,6 +12,7 @@
         <a href="http://localhost:5173/resetseat" class="btn btn-primary mr-4" style="color: white;">resetseat</a>
         <a href="http://localhost:5173/checkpaymentadmin" class="btn btn-secondary" style="color: white;">ตรวจสอบการชำระเงิน</a>
       </div>
+      
       
       <v-row>
           <v-col cols="12" offset-sm="3" sm="6" >
@@ -31,55 +33,64 @@
 
           </v-col>
         </v-row>
-        
     </div>
     <!--Tab menu-->
     <div class="padding-pd"></div>
+    
+    
 
-    <div class="container mx-auto max-w-lg">
-      <div class="flex flex-col justify-center items-center">
-        <h1 class="text-2xl font-bold mb-4">ตรวจสอบการชำระเงิน</h1>
 
-        <!-- Ticket List -->
-        <div class="flex flex-col gap-4 w-full">
-          <div v-for="index in 5" :key="index" class="border-2 border-gray-900 p-4 flex justify-between items-center">
-            <div class="ticket-info">
-              เลขที่ตั๋ว Number:
-              <span class="text-blue-900">{{ String(index).padStart(5, "0") }}</span>
-            </div>
 
-            <div class="ticket-status">
-              ชำระเงินแล้ว
-            </div>
-          </div>
-        </div>
-        <!-- Ticket List -->
 
-      </div>
-    </div>
+
+
+
+
+
+    <div class="padding-pd"></div>
   </body>
 </template>
-
+  
+  
 <script>
+import axios from 'axios'
 import { useUserStore } from '@/stores/user'
-export default  {
-  setup() {
+
+    export default  {
+      setup() {
         const userStore = useUserStore()
         return {
           userStore
         }
       },
+      data() {
+        return {
+          
+        }
+      },
+      async mounted() {
 
-// debug methods
-methods: {
-  logout(){
-        this.userStore.removeToken()
-        this.$router.push('/')
-  },
-  }
-}     
+      },
+
+      // debug methods
+    methods: {
+   
+      
+
+
+
+      logout(){
+              this.userStore.removeToken()
+              this.$router.push('/')
+      },
+
+      }
+    }      
 </script>
-
+  
+  
+  
 <style>
 
 </style>
+  

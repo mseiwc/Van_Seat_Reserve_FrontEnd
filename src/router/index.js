@@ -13,6 +13,7 @@ import AddRouteView from '../views/AddRouteView.vue'
 import CheckPaymentAdminView from '../views/CheckPaymentAdminView.vue'
 import SeatSelectionView from '../views/SeatSelectionView.vue'
 import SeatReservationView from '../views/SeatReservationView.vue'
+import ResetSeatView from '../views/ResetSeatView.vue'
 
 import HomeDriverView from '../views/HomeDriverView.vue'
 
@@ -103,7 +104,12 @@ const router = createRouter({
       path: '/addcar',
       name: 'addcar',
       component: () => import('../views/AddCarView.vue')
-    }
+    },
+    {
+      path: '/resetseat',
+      name: 'resetseat',
+      component: ResetSeatView
+    },
   ]
 })
 
