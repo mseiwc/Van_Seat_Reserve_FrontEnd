@@ -53,7 +53,7 @@
     <!--ส่งข้อมูลไปให้ Admin ยืนยัน-->
     <div class="button-container">
       <button class="btn-back">ย้อนกลับ</button>
-      <button class="btn-confirm">ชำระเงินสำเร็จ</button>
+      <button class="btn-confirm" @click="submitPayment">ชำระเงินสำเร็จ</button>
     </div>
     
 
@@ -102,6 +102,7 @@ export default {
   },
    
   methods: {
+
     async fetchTicketID(){
 
       await axios
@@ -128,6 +129,23 @@ export default {
               this.userStore.removeToken()
               this.$router.push('/')
     },
+    async submitPayment(){
+      // อัปเดตสถานะของที่นั่งหลังจากจอง
+      const id = this.ticketId; // ID ของที่นั่งที่ต้องการอัปเดต
+      const newData = { status: 'paid' }; // ข้อมูลใหม่ที่ต้องการอัปเดต
+      await this.updateTicketStatus(id, newData);
+
+    },
+    async updateTicketStatus(id, newData) {
+            try {
+              const response = await axios.put(`/tickets/${id}/`, newData);
+              console.log(response.data); // แสดงข้อมูลที่ได้รับกลับจาก API
+              return response.data;
+            } catch (error) {
+              console.error('Error updating seat status:', error);
+              throw error;
+            }
+          },
   }
 }
 </script>
