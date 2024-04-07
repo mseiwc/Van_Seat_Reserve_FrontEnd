@@ -577,4 +577,36 @@ import axios from 'axios'
     padding: 15px;
 }
 /* \Confirm Reserve */
+
+/* Check Payment */
+.payment-container {
+    width: 50%;
+    margin: auto;
+}
+.ticket-info,
+.ticket-status {
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.ticket-status {
+  color: #ff0000;
+  text-align: right;
+  font-size: 20px;
+}
+/* \Check Payment */
+
+/*  Payment List */
+.btn-payment {
+    border-radius: 50px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    box-sizing: border-box;
+    color: #ffffff;
+    background-color: #0965A7;
+    padding: 15px;
+    margin: 1% 75%;
+    width: 20%;
+}
+/*  \Payment List */
 </style>
