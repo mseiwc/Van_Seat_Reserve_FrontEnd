@@ -72,7 +72,11 @@
                 <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
                 <td>{{ item.add_route_id.date }}</td>
                 <td>{{ item.add_route_id.time }}</td>
-                <td><button class="btn-detail" @click.prevent="">รายละเอียด</button></td>
+                <td>
+                  <button class="btn-detail" @click.prevent="">
+                    <RouterLink :to="{ name: 'ticketdetail', params: { itemId: item.id } }">รายละเอียด</RouterLink>
+                  </button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -86,6 +90,7 @@
 <script>
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
+import { RouterLink } from 'vue-router';
 
     export default  {
       setup() {

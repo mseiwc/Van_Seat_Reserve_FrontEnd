@@ -112,7 +112,7 @@ const router = createRouter({
       component: ResetSeatView
     },
     {
-      path: '/ticketdetail',
+      path: '/ticketdetail/:itemId',
       name: 'ticketdetail',
       component: TicketDetailView
     },

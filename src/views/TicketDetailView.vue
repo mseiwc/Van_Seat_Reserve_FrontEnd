@@ -50,6 +50,7 @@
   
 <script>
 import axios from 'axios'
+import { RouterLink } from 'vue-router';
 import { useUserStore } from '@/stores/user'
 
     export default  {
@@ -59,30 +60,56 @@ import { useUserStore } from '@/stores/user'
           userStore
         }
       },
-
       data() {
         return {
-          
-
+          routeData: {
+            startRoute: '',
+            endRoute: '',
+            date: '',
+            
+          },
+          selectStartRoute: '',
+          selectEndRoute: '',
+          routes: [],
+          routeschedule: [],
+          searchs: [],
+          // ticket detail
+          ticketId: "",
+          tickets: []
         }
       },
-
+      props: ['itemId'],
+      created() {
+        // เมื่อหน้านี้ถูกสร้างขึ้น ให้ดึงค่า itemId จาก Vue Router
+        this.ticketId = this.$route.params.itemId
+      },
       async mounted() {
+        await this.fetchTickets()
         
       },
-
       methods: {
-        
-          logout(){
+
+        // get startRoute, endRoute
+        async fetchTickets(){
+
+          await axios
+          .get(`/tickets/?id=${this.ticketId}`)
+          .then(response => {
+              console.log(response.data)
+              this.tickets = response.data
+
+            }
+          ).catch(error => {
+          })
+        },
+        logout(){
               this.userStore.removeToken()
               this.$router.push('/')
-          },
-
-
-
-
+         },
       }
+
 }
+
 </script>
   
   
