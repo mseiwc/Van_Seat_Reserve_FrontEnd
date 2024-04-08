@@ -124,6 +124,15 @@ import { useUserStore } from '@/stores/user'
       },
       // debug methods
       methods: {
+        clearInput() {
+          this.routeData.startRoute = ''
+          this.routeData.endRoute = ''
+          this.routeData.date = ''
+          this.routeData.time = ''
+          this.routeData.price = ''
+          this.routeData.car = ''
+          this.routeData.driver = ''
+        },
         async fetchRoutes(){
           await axios.get('/routes/').then(
             response => {
@@ -162,10 +171,10 @@ import { useUserStore } from '@/stores/user'
 
         submitRouteForm () {
 
-          if (this.selectStartRoute==="") {
+          if (this.startRoute==="") {
             console.log('start route เป็นช่องว่าง')
           }
-          if (this.selectEndRoute==="") {
+          if (this.endRoute==="") {
             console.log('end route เป็นช่องว่าง')
           }
           if (this.date==="") {
@@ -177,7 +186,7 @@ import { useUserStore } from '@/stores/user'
           if (this.price==="") {
             console.log('price เป็นช่องว่าง')
           }
-          if (this.selectDriver==="") {
+          if (this.driver==="") {
             console.log('driver เป็นช่องว่าง')
           }
           if (this.carNumber==="") {
@@ -187,7 +196,7 @@ import { useUserStore } from '@/stores/user'
             .post('/addroutes/', this.routeData)
             .then((response) => { 
               if(response.data.message==='success'){
-
+                this.clearInput();
               } else {
                   console.error(response.data.message)
               }

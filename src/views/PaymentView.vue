@@ -50,7 +50,6 @@
     </div>
 
     
-    <!--ส่งข้อมูลไปให้ Admin ยืนยัน-->
     <div class="button-container">
       <button class="btn-back" @click="back">ย้อนกลับ</button>
       <button class="btn-confirm" @click="submitPayment">ชำระเงินสำเร็จ</button>
