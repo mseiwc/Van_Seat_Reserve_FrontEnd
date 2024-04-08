@@ -40,8 +40,23 @@
     </div> 
     
     
+    <div class="payment-container">
+      <div v-for="item in tickets" :value="item" :key="item" class="border-2 border-gray-900 p-4" style="margin: 2%;">
+        <div class="ticket-info">เลขที่ตั๋ว : {{ item.id }}</div>
+        <div class="ticket-info">ชื่อ-นามสกุล : {{ item.user_id.firstName }} {{ item.user_id.lastName }}</div>
+        <div class="ticket-info">เลขที่รถ : {{ item.add_route_id.car_id.no }}</div>
+        <div class="ticket-info">เลขที่นั่ง : {{ item.seat_id.no }}</div>
+        <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
+        <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
+        <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
+        <div class="ticket-status" v-if="item.status === 'unpaid'" style="color: #ff0000">ยังไม่ได้ชำระเงิน</div>
+        <div class="ticket-status" v-if="item.status === 'paid'" style="color: rgb(40 151 21);">ชำระเงินแล้ว</div>
+      </div>
+    </div>
     
-    
+    <div class="button-container">
+      <button class="btn-back"> <router-link to="/home/user">ย้อนกลับ</router-link></button>
+    </div>
 
     <div class="padding-pd"></div>
   </body>
@@ -62,20 +77,14 @@ import { useUserStore } from '@/stores/user'
       },
       data() {
         return {
-          routeData: {
-            startRoute: '',
-            endRoute: '',
-            date: '',
-            
-          },
-          selectStartRoute: '',
-          selectEndRoute: '',
-          routes: [],
-          routeschedule: [],
-          searchs: [],
-          // ticket detail
+          tickets:[],
           ticketId: "",
-          tickets: []
+
+            
+          // userInfo
+          user: [],
+          userId: '',
+
         }
       },
       props: ['itemId'],
@@ -83,26 +92,34 @@ import { useUserStore } from '@/stores/user'
         // เมื่อหน้านี้ถูกสร้างขึ้น ให้ดึงค่า itemId จาก Vue Router
         this.ticketId = this.$route.params.itemId
       },
+
       async mounted() {
-        await this.fetchTickets()
-        
+          await this.fetchTickets()
       },
       methods: {
+          async fetchTickets(){
 
-        // get startRoute, endRoute
-        async fetchTickets(){
+          // get user id # 90
+          this.userStore.initStore()
+          this.user = this.userStore.user
+          // console.log(this.user)
+          this.userId = this.userStore.user.id //user_id
+          // console.log(this.userId)
 
           await axios
           .get(`/tickets/?id=${this.ticketId}`)
           .then(response => {
               console.log(response.data)
               this.tickets = response.data
+              // this.searchs = response.data
 
             }
           ).catch(error => {
           })
-        },
-        logout(){
+
+          },
+        
+          logout(){
               this.userStore.removeToken()
               this.$router.push('/')
          },

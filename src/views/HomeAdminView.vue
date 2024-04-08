@@ -45,9 +45,11 @@
       <img src="../views/img/search.png" class="search-img">
       <form action="#" @submit.prevent="submitRouteForm">
       <select id="route-dropdown" v-model="routeData.startRoute" class="select-route-input">
+        <option value="">- เลือกเส้นทาง -</option>
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select>
       <select id="route-dropdown" v-model="routeData.endRoute" class="select-route-input">
+        <option value="">- เลือกเส้นทาง -</option>
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select>
       <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
@@ -69,14 +71,29 @@
         </thead>
         <tbody>
             
-            <tr v-for="item in addroutes" :value="item" :key="item">
+            <tr v-for="item in searchs" :value="item" :key="item">
                 <td>{{ item.id }}</td>
                 <td>{{ item.date }}</td>
                 <td>{{ item.time }}</td>
                 <td>{{ item.startRoute_id.name }} - {{ item.endRoute_id.name }}</td>
                 <td>{{ item.car_id.carNumber }}</td>
                 <td>{{ item.car_id.no }}</td>
-                <td><button class="btn-delete-route" @click.prevent="deleteRoute(item)">ลบรอบรถ</button></td>
+                <td>
+                  <!-- <button class="btn-delete-route" @click.prevent="deleteRoute(item)">ลบรอบรถ</button> -->
+                  <v-dialog v-model="dialog" max-width="500px">
+                      <template v-slot:activator="{ on }">
+                        <button class="btn-delete-route" @click="showConfirmation(item)">ลบรอบรถ</button>
+                      </template>
+                      <v-card>
+                        <v-card-title class="headline">ยืนยันการลบ</v-card-title>
+                        <v-card-text>คุณแน่ใจหรือไม่ที่ต้องการลบรอบรถนี้?</v-card-text>
+                        <v-card-actions>
+                          <v-btn color="primary"  @click.prevent="deleteAddRouteConfirmed()">ยืนยัน</v-btn>
+                          <v-btn color="error" @click="dialog = false">ยกเลิก</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                </td>
             </tr>
             
         </tbody>
@@ -111,6 +128,8 @@ import { useUserStore } from '@/stores/user'
             routes: [],
             addroutes:[],
             searchs: [],
+            dialog: false, // เพิ่มตัวแปร dialog เพื่อควบคุมการแสดง/ซ่อนกล่องโต้ตอบ
+            selectedAddRoute: null // เพิ่มตัวแปร selectedSeatId เพื่อเก็บ ID ของที่นั่งที่ถูกเลือก
           
         }
       },
@@ -121,6 +140,14 @@ import { useUserStore } from '@/stores/user'
       },
 
       methods: {
+        showConfirmation(item) {
+        this.selectedAddRoute = item; // เก็บ ID ของที่นั่งที่ถูกคลิก
+        this.dialog = true; // เปิดกล่องโต้ตอบ
+      },
+      async deleteAddRouteConfirmed() {
+      await this.deleteRoute(this.selectedAddRoute); // ส่ง ID ของที่นั่งที่ถูกเลือกไปยัง method resetSeat()
+      this.dialog = false; // ปิดกล่องโต้ตอบหลังจากทำการรีเซ็ตที่นั่งเสร็จสิ้น
+},
         // get startRoute, endRoute
         async fetchRoutes(){
 
@@ -129,6 +156,7 @@ import { useUserStore } from '@/stores/user'
           .then(response => {
               console.log(response.data)
               this.routes = response.data
+              
 
             }
           ).catch(error => {
@@ -144,6 +172,7 @@ import { useUserStore } from '@/stores/user'
           .then(response => {
               console.log(response.data)
               this.addroutes = response.data
+              this.searchs = response.data
 
             }
           ).catch(error => {
@@ -154,16 +183,26 @@ import { useUserStore } from '@/stores/user'
         // แสดงตารางข้อมูลที่ query
         submitRouteForm () {
 
-          axios
-            .get(`/addroutes/?startRoute=${this.routeData.startRoute}&endRoute=${this.routeData.endRoute}&date=${this.routeData.date}`)
-            .then(response => {
-                console.log(response.data)
-                this.addroutes = response.data // จากแสดงตารางทั้งหมด (addroutes) -> ถูกเปลี่ยนเป็นแสดงตารางจากข้อมูลที่ถูก query แล้ว (response.data)
+          // axios
+          //   .get(`/addroutes/?startRoute=${this.routeData.startRoute}&endRoute=${this.routeData.endRoute}&date=${this.routeData.date}`)
+          //   .then(response => {
+          //       console.log(response.data)
+          //       this.addroutes = response.data // จากแสดงตารางทั้งหมด (addroutes) -> ถูกเปลี่ยนเป็นแสดงตารางจากข้อมูลที่ถูก query แล้ว (response.data)
                 
 
-              }
-            ).catch(error => {
-            })
+          //     }
+          //   ).catch(error => {
+          //   })
+
+              // ค้นหาข้อมูลในอาเรย์ tickets โดยใช้ startRoute, endRoute, และ date
+              this.searchs = this.addroutes.filter(item => {
+              // ตรวจสอบว่ามีการเลือกค่าใน dropdown หรือไม่ ถ้าไม่มีให้เช็คทุกค่า
+              const startRouteMatch = this.routeData.startRoute ? item.startRoute === this.routeData.startRoute : true;
+              const endRouteMatch = this.routeData.endRoute ? item.endRoute === this.routeData.endRoute : true;
+              const dateMatch = this.routeData.date ? item.date === this.routeData.date : true;
+
+              return startRouteMatch && endRouteMatch && dateMatch;
+            });
 
       },
 

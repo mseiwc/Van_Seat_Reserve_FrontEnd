@@ -56,8 +56,23 @@
                 <td>{{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
                 <td>{{ item.add_route_id.date }}</td>
                 <td>{{ item.add_route_id.time }}</td>
-                <td><button class="btn-resetseat" @click.prevent="resetSeat(item.seat_id.id)">รีเซ็ตที่นั่ง</button></td>
-                
+                <td>
+                  <!-- <button class="btn-resetseat" @click.prevent="resetSeat(item.seat_id.id)">รีเซ็ตที่นั่ง</button> -->
+                    <!-- ส่วนอื่น ๆ ของ template -->
+                    <v-dialog v-model="dialog" max-width="500px">
+                      <template v-slot:activator="{ on }">
+                        <button class="btn-resetseat" @click="showConfirmation(item.seat_id.id)">รีเซ็ตที่นั่ง</button>
+                      </template>
+                      <v-card>
+                        <v-card-title class="headline">ยืนยันการลบ</v-card-title>
+                        <v-card-text>คุณแน่ใจหรือไม่ที่ต้องการรีเซ็ตที่นั่งนี้?</v-card-text>
+                        <v-card-actions>
+                          <v-btn color="primary"  @click.prevent="resetSeatConfirmed()">ยืนยัน</v-btn>
+                          <v-btn color="error" @click="dialog = false">ยกเลิก</v-btn>
+                        </v-card-actions>
+                      </v-card>
+                    </v-dialog>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -88,6 +103,8 @@ import { useUserStore } from '@/stores/user'
       data() {
         return {
           tickets: [],
+          dialog: false, // เพิ่มตัวแปร dialog เพื่อควบคุมการแสดง/ซ่อนกล่องโต้ตอบ
+          selectedSeatId: null // เพิ่มตัวแปร selectedSeatId เพื่อเก็บ ID ของที่นั่งที่ถูกเลือก
         }
         
       },
@@ -116,7 +133,11 @@ import { useUserStore } from '@/stores/user'
           }
       },
       // debug methods
-    methods: {
+    methods: {   // method สำหรับเปิดกล่องโต้ตอบ
+      showConfirmation(seatId) {
+        this.selectedSeatId = seatId; // เก็บ ID ของที่นั่งที่ถูกคลิก
+        this.dialog = true; // เปิดกล่องโต้ตอบ
+      },
       async updateSeatStatus(id, newData) {
             try {
               const response = await axios.put(`/seats/${id}/`, newData);
@@ -150,12 +171,14 @@ import { useUserStore } from '@/stores/user'
 
         const newData = { status: 'available' }; // ข้อมูลใหม่ที่ต้องการอัปเดต
         await this.updateSeatStatus(seatId, newData);
-        this.fetchTickets()
-
-
-
-      }
-
+        await this.fetchTickets()
+        // ปิดกล่องโต้ตอบหลังจากทำการรีเซ็ตที่นั่งเสร็จสิ้น
+         this.dialog = false
+      },
+      async resetSeatConfirmed() {
+      await this.resetSeat(this.selectedSeatId); // ส่ง ID ของที่นั่งที่ถูกเลือกไปยัง method resetSeat()
+      this.dialog = false; // ปิดกล่องโต้ตอบหลังจากทำการรีเซ็ตที่นั่งเสร็จสิ้น
+},
 
       }
     }      

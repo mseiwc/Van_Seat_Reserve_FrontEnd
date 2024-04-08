@@ -40,9 +40,11 @@
       <img src="../views/img/search.png" class="search-img">
       <form action="#" @submit.prevent="submitRouteForm">
       <select id="route-dropdown" v-model="routeData.startRoute" class="select-route-input">
+        <option value="">- เลือกเส้นทาง -</option>
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select><br />
       <select id="route-dropdown" v-model="routeData.endRoute" class="select-route-input">
+        <option value="">- เลือกเส้นทาง -</option>
         <option v-for="item in routes" :value="item.id" :key="item.id">{{ item.name }}</option>
       </select><br />
       <input type="date" v-model="routeData.date" id="reserveInput" placeholder="วันที่เดินทาง">
@@ -62,7 +64,7 @@
         </thead>
         <tbody>
             
-            <tr v-for="item in addroutes" :value="item" :key="item">
+            <tr v-for="item in searchs" :value="item" :key="item">
                 <td>{{ item.date }}</td>
                 <td>{{ item.time }}</td>
                 <td>{{ item.startRoute_id.name }} - {{ item.endRoute_id.name }}</td>
@@ -155,7 +157,9 @@ import { useUserStore } from '@/stores/user'
           .get(`/addroutes/?driver_id=${this.userId}`) 
           .then(response => {
               console.log(response.data)
-              this.addroutes = response.data
+              this.addroutes = response.data 
+              this.searchs = response.data
+
 
             }
           ).catch(error => {
@@ -166,22 +170,32 @@ import { useUserStore } from '@/stores/user'
         // แสดงตารางข้อมูลที่ query
         submitRouteForm () {
 
-          this.userStore.initStore()
-          this.user = this.userStore.user
-          console.log(this.user)
-          this.userId = this.userStore.user.id //user_id
-          console.log(this.userId)
+          // this.userStore.initStore()
+          // this.user = this.userStore.user
+          // console.log(this.user)
+          // this.userId = this.userStore.user.id //user_id
+          // console.log(this.userId)
 
-          axios
-            .get(`/addroutes/?startRoute=${this.routeData.startRoute}&endRoute=${this.routeData.endRoute}&date=${this.routeData.date}&driver_id=${this.userId}`)
-            .then(response => {
-                console.log(response.data)
-                this.addroutes = response.data // จากแสดงตารางทั้งหมด (addroutes) -> ถูกเปลี่ยนเป็นแสดงตารางจากข้อมูลที่ถูก query แล้ว (response.data)
+          // axios
+          //   .get(`/addroutes/?startRoute=${this.routeData.startRoute}&endRoute=${this.routeData.endRoute}&date=${this.routeData.date}&driver_id=${this.userId}`)
+          //   .then(response => {
+          //       console.log(response.data)
+          //       this.addroutes = response.data // จากแสดงตารางทั้งหมด (addroutes) -> ถูกเปลี่ยนเป็นแสดงตารางจากข้อมูลที่ถูก query แล้ว (response.data)
                 
 
-              }
-            ).catch(error => {
-            })
+          //     }
+          //   ).catch(error => {
+          //   })
+
+              // ค้นหาข้อมูลในอาเรย์ tickets โดยใช้ startRoute, endRoute, และ date
+              this.searchs = this.addroutes.filter(item => {
+              // ตรวจสอบว่ามีการเลือกค่าใน dropdown หรือไม่ ถ้าไม่มีให้เช็คทุกค่า
+              const startRouteMatch = this.routeData.startRoute ? item.startRoute === this.routeData.startRoute : true;
+              const endRouteMatch = this.routeData.endRoute ? item.endRoute === this.routeData.endRoute : true;
+              const dateMatch = this.routeData.date ? item.date === this.routeData.date : true;
+
+              return startRouteMatch && endRouteMatch && dateMatch;
+            });
 
       },
       logout(){
