@@ -195,11 +195,12 @@ import { useUserStore } from '@/stores/user'
           axios
             .post('/addroutes/', this.routeData)
             .then((response) => { 
-              if(response.data.message==='success'){
-                this.clearInput();
-              } else {
-                  console.error(response.data.message)
-              }
+              this.clearInput();
+              // if(response.data.message==='success'){
+              //   this.clearInput();
+              // } else {
+              //     console.error(response.data.message)
+              // }
             })
             .catch((error)=>{
               console.log('error', error)
