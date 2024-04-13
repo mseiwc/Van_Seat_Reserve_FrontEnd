@@ -45,7 +45,9 @@
             <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
             <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
             <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
+            <div class="ticket-info" v-if="item.statusApprove === 'pending'">สถานะการอนุมัติ: รอดำเนินการ</div>
             <div class="ticket-status" v-if="item.status === 'unpaid'" style="color: #ff0000">ยังไม่ได้ชำระเงิน</div>
+            <!-- <div class="ticket-status" v-if="item.status === 'pending'" style="color: #ff0000">รออนุมัติ</div> -->
             <div class="ticket-status" v-if="item.status === 'paid'" style="color: rgb(40 151 21);">ชำระเงินแล้ว</div>
           </div>
 
@@ -93,7 +95,7 @@ methods: {
         // console.log(this.userId)
 
         await axios
-        .get(`/tickets/?user_id=${this.userId}`)
+        .get(`/tickets/?user_id=${this.userId}&statusApprove=${'pending'}&status=${'paid'}`)
         .then(response => {
             console.log(response.data)
             this.tickets = response.data

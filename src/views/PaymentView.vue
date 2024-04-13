@@ -48,12 +48,36 @@
       <img src="../views/img/qr-code.jpg" class="qr-code">
       <h4>โปรดสแกนคิวอาร์โค้ดเพื่อชำระเงิน</h4>
     </div>
+    <!-- evident -->
+    <div style="margin-top: 5%">
+      <div class="menu-align2">
+        <h3 style="margin-top: 2% !important;">เพิ่มหลักฐานการชำระเงิน</h3>
+      </div>
+      <form action="#" @submit.prevent="submitAddCarForm">
+        <div class="car-form">
 
-    
-    <div class="button-container">
-      <button class="btn-back" @click="back">ย้อนกลับ</button>
-      <button class="btn-confirm" @click="submitPayment">ชำระเงินสำเร็จ</button>
+            <label for="fname" >วันที่</label><br />
+            <input type="date" placeholder="" v-model="payDate"><br />
+
+
+            <label for="fname">เวลา</label><br />
+            <input type="time" placeholder="" v-model="payTime"><br />
+
+            <label for="fname">ราคา</label><br />
+            <input type="number" placeholder="" v-model="payPrice"><br />
+          
+        </div>
+        <div class="button-container">
+          <button class="btn-back" @click="back">ย้อนกลับ</button>
+          <button class="btn-confirm" @click="submitPayment">ชำระเงินสำเร็จ</button>
+        </div>
+
+      </form>
+      
+
     </div>
+
+
     
 
     <div class="padding-pd"></div>
@@ -85,7 +109,13 @@ export default {
       startRoute: '',
       endRoute: '',
       time: '',
-      date: ''
+      date: '',
+
+      // playload
+      payTime: '',
+      payDate: '',
+      payPrice: ''
+
 
 
     };
@@ -129,27 +159,38 @@ export default {
               this.$router.push('/')
     },
     async submitPayment(){
-      // อัปเดตสถานะของที่นั่งหลังจากจอง
-      const id = this.ticketId; // ID ของที่นั่งที่ต้องการอัปเดต
-      const newData = { status: 'paid' }; // ข้อมูลใหม่ที่ต้องการอัปเดต
-      await this.updateTicketStatus(id, newData);
-      this.$router.push('/checkpaymentuser')
-
-    },
-    async updateTicketStatus(id, newData) {
-            try {
-              const response = await axios.put(`/tickets/${id}/`, newData);
-              console.log(response.data); // แสดงข้อมูลที่ได้รับกลับจาก API
-              return response.data;
-            } catch (error) {
-              console.error('Error updating seat status:', error);
-              throw error;
-            }
-          },
-      back(){
-        this.$router.push('/paymentlist')
-
+      if(this.payDate && this.payTime && this.payPrice){ // เงื่อนไขเช็คว่า payDate, payTime, และ payPrice ไม่เป็น null
+        const id = this.ticketId; // ID ของที่นั่งที่ต้องการอัปเดต
+        const newData = { status: 'paid', payDate: this.payDate, payTime: this.payTime, payPrice:  this.payPrice}; // ข้อมูลใหม่ที่ต้องการอัปเดต
+        await this.updateTicketStatus(id, newData);
+        this.$router.push('/checkpaymentuser');
+      } else {
+        // แสดงข้อความหรือจัดการเหตุการณ์เมื่อมีค่า null ใน payDate, payTime, หรือ payPrice
+        console.log('กรุณากรอกข้อมูล payDate, payTime, และ payPrice');
       }
+    },
+    // async submitPayment(){
+    //   // อัปเดตสถานะของที่นั่งหลังจากจอง
+    //   const id = this.ticketId; // ID ของที่นั่งที่ต้องการอัปเดต
+    //   const newData = { status: 'paid', payDate: this.payDate, payTime: this.payTime, payPrice:  this.payPrice}; // ข้อมูลใหม่ที่ต้องการอัปเดต
+    //   await this.updateTicketStatus(id, newData);
+    //   this.$router.push('/checkpaymentuser')
+    // },
+
+    async updateTicketStatus(id, newData) {
+      try {
+        const response = await axios.put(`/tickets/${id}/`, newData);
+        console.log(response.data); // แสดงข้อมูลที่ได้รับกลับจาก API
+        return response.data;
+      } catch (error) {
+        console.error('Error updating seat status:', error);
+        throw error;
+      }
+    },
+    back(){
+      this.$router.push('/paymentlist')
+
+    }
   }
 }
 </script>
