@@ -58,7 +58,7 @@
 
             <div class="button-container">
                   <!-- <button class="btn-confirm" @click="PaymentReceipt">หลักฐานการชำระเงิน</button> -->
-                  <button class="btn-confirm" @click="confirmPayment">อนุมัติ</button>
+                  <button class="btn-confirm" @click="confirmPayment(item.id)">อนุมัติ</button>
                   
                   
             </div>
@@ -124,6 +124,23 @@ methods: {
         this.userStore.removeToken()
         this.$router.push('/')
   },
+  async confirmPayment(idTicket){
+    const id = idTicket; // ID ของที่นั่งที่ต้องการอัปเดต
+    const newData = { statusApprove: 'approve'}; // ข้อมูลใหม่ที่ต้องการอัปเดต
+    await this.updateTicketStatus(id, newData);
+    await this.fetchTickets()
+
+  },
+  async updateTicketStatus(id, newData) {
+      try {
+        const response = await axios.put(`/tickets/${id}/`, newData);
+        console.log(response.data); // แสดงข้อมูลที่ได้รับกลับจาก API
+        return response.data;
+      } catch (error) {
+        console.error('Error updating seat status:', error);
+        throw error;
+      }
+    },
   }
 }     
 </script>
