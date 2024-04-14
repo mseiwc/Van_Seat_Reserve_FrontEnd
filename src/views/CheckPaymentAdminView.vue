@@ -40,37 +40,68 @@
         <h3>ตรวจสอบการชำระเงิน</h3>
     </div>
 
-    <div class="payment-container">
+    <div class="payment-container2">
 
-          <div v-for="item in tickets" :value="item" :key="item" class="border-2 border-gray-900 p-4" style="margin: 2%;">
-            <div class="ticket-info">เลขที่ตั๋ว : {{ item.id }}</div>
-            <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
-            <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
-            <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
-            <div class="ticket-info">ราคา : {{ item.add_route_id.price }}</div>
+          <table id="UserTable2" v-for="item in tickets" :value="item" :key="item">
+          <tbody>
+            <tr>
+              <td>เลขที่ตั๋ว : {{ item.id }}</td>
+              <td><div v-if="item.status === 'unpaid'" style="color: #ff0000"><span style="color: black">สถานะการชำระเงิน: </span>ยังไม่ได้ชำระเงิน</div>
+            <!-- <div class="ticket-status" v-if="item.status === 'pending'" style="color: #ff0000">รออนุมัติ</div> -->
+              <div v-if="item.status === 'paid'" style="color: rgb(40 151 21);"><span style="color: black">สถานะการชำระเงิน: </span>ชำระเงินแล้ว</div></td>
+            </tr>  
+
+            <tr>
+              <td>เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</td>
+              <td>วันที่ชำระเงิน : {{ item.payDate }}</td>
+              
+            </tr>  
+
+            <tr>
+              <td>วันที่ : {{ item.add_route_id.date }}</td>
+              <td>เวลาชำระเงิน : {{ item.payTime }}</td>
+              
+            </tr> 
+
+            <tr>
+              <td>เวลา : {{ item.add_route_id.time }}</td>
+              <td>ราคาที่ชำระเงิน : {{ item.payPrice }}</td>
+              
+            </tr> 
+              
+            <tr>
+              <td>ราคา : {{ item.add_route_id.price }}</td>
+              <!--<td v-if="item.statusApprove === 'pending'">สถานะการอนุมัติ: รอดำเนินการ</td>-->
+              
+
+            </tr>  
+
+            <tr>
+              <td colspan="2"><div class="button-container3">
+                  <!-- <button class="btn-confirm" @click="PaymentReceipt">หลักฐานการชำระเงิน</button> -->
+                  <button class="btn-reject-payment" @click="rejectPayment(item.id)">ไม่อนุมัติ</button>
+                  <button class="btn-confirm-payment" @click="confirmPayment(item.id)">อนุมัติ</button>
+                  </div>
+              </td>
+            </tr> 
+              
 
             
-            <div class="ticket-info" v-if="item.status === 'unpaid'" style="color: #ff0000"><span style="color: black">สถานะการชำระเงิน: </span>ยังไม่ได้ชำระเงิน</div>
-            <!-- <div class="ticket-status" v-if="item.status === 'pending'" style="color: #ff0000">รออนุมัติ</div> -->
-            <div class="ticket-info" v-if="item.status === 'paid'" style="color: rgb(40 151 21);"><span style="color: black">สถานะการชำระเงิน: </span>ชำระเงินแล้ว</div>
+              
+            
+          </tbody>
 
-            <div class="ticket-info">วันที่ชำระเงิน : {{ item.payDate }}</div>
-            <div class="ticket-info">เวลาชำระเงิน : {{ item.payTime }}</div>
-            <div class="ticket-info">ราคาที่ชำระเงิน : {{ item.payPrice }}</div>
-            <div class="ticket-info" v-if="item.statusApprove === 'pending'">สถานะการอนุมัติ: รอดำเนินการ</div>
+            
+            
+            
+            
 
             <!-- <div class="ticket-status" v-if="item.status === 'unpaid'" style="color: #ff0000">ยังไม่ได้ชำระเงิน</div>
             <!-- <div class="ticket-status" v-if="item.status === 'pending'" style="color: #ff0000">รออนุมัติ</div> -->
             <!-- <div class="ticket-status" v-if="item.status === 'paid'" style="color: rgb(40 151 21);">ชำระเงินแล้ว</div> --> 
 
-            <div class="button-container">
-                  <!-- <button class="btn-confirm" @click="PaymentReceipt">หลักฐานการชำระเงิน</button> -->
-                  <button class="btn-confirm" @click="confirmPayment(item.id)">อนุมัติ</button>
-                  <button class="btn-confirm" @click="rejectPayment(item.id)" style="background-color: #ff0000">ไม่อนุมัติ</button>
-                  
-                  
-            </div>
-          </div>
+            
+          </table>
 
     </div>
 

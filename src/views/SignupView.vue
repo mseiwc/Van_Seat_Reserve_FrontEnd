@@ -592,6 +592,45 @@ import axios from 'axios'
   text-align: right;
   font-size: 20px;
 }
+
+.payment-container2 {
+    width: 50%;
+    margin: auto;
+}
+.btn-confirm-payment {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #0965A7;
+  padding: 15px;
+  width: calc(20% - 20px);
+}
+.btn-reject-payment {
+  border-radius: 50px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+  box-sizing: border-box;
+  color: #ffffff;
+  background-color: #ff0000;
+  padding: 15px;
+  width: calc(20% - 20px);
+  margin-right: 2%;
+}
+#UserTable2 {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #4ea7db;
+  margin-top: 3%;
+}
+#UserTable2 th, #UserTable2 td {
+  padding: 25px;
+}
+.button-container3 {
+  display: flex;
+  justify-content: end;
+}
 /* \Check Payment */
 
 /*  Payment List */
