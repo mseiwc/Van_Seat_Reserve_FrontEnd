@@ -41,6 +41,8 @@
       <div class="seat-text">{{ startRoute }} - {{ endRoute }}</div>
       <div class="seat-text">วันที่ : {{ date }}</div>
       <div class="seat-text">เวลา : {{ time }}</div>
+      <div class="seat-text">ราคา : {{ price }}</div>
+
     </div>
   
     <div class="menu-align2">
@@ -65,6 +67,7 @@
 
             <label for="fname">ราคา</label><br />
             <input type="number" placeholder="" v-model="payPrice"><br />
+
           
         </div>
         <div class="button-container">
@@ -110,6 +113,7 @@ export default {
       endRoute: '',
       time: '',
       date: '',
+      price: '',
 
       // playload
       payTime: '',
@@ -145,6 +149,7 @@ export default {
           this.endRoute = response.data[0].add_route_id.endRoute_id.name
           this.date = response.data[0].add_route_id.date
           this.time = response.data[0].add_route_id.time
+          this.price = response.data[0].add_route_id.price
 
 
 

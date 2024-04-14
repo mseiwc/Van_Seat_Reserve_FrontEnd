@@ -47,18 +47,26 @@
             <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
             <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
             <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
-            <div class="ticket-info" v-if="item.statusApprove === 'pending'">สถานะการอนุมัติ: รอดำเนินการ</div>
+            <div class="ticket-info">ราคา : {{ item.add_route_id.price }}</div>
+
+            
+            <div class="ticket-info" v-if="item.status === 'unpaid'" style="color: #ff0000"><span style="color: black">สถานะการชำระเงิน: </span>ยังไม่ได้ชำระเงิน</div>
+            <!-- <div class="ticket-status" v-if="item.status === 'pending'" style="color: #ff0000">รออนุมัติ</div> -->
+            <div class="ticket-info" v-if="item.status === 'paid'" style="color: rgb(40 151 21);"><span style="color: black">สถานะการชำระเงิน: </span>ชำระเงินแล้ว</div>
+
             <div class="ticket-info">วันที่ชำระเงิน : {{ item.payDate }}</div>
             <div class="ticket-info">เวลาชำระเงิน : {{ item.payTime }}</div>
-            <div class="ticket-info">ราคา : {{ item.payPrice }}</div>
+            <div class="ticket-info">ราคาที่ชำระเงิน : {{ item.payPrice }}</div>
+            <div class="ticket-info" v-if="item.statusApprove === 'pending'">สถานะการอนุมัติ: รอดำเนินการ</div>
 
-            <div class="ticket-status" v-if="item.status === 'unpaid'" style="color: #ff0000">ยังไม่ได้ชำระเงิน</div>
+            <!-- <div class="ticket-status" v-if="item.status === 'unpaid'" style="color: #ff0000">ยังไม่ได้ชำระเงิน</div>
             <!-- <div class="ticket-status" v-if="item.status === 'pending'" style="color: #ff0000">รออนุมัติ</div> -->
-            <div class="ticket-status" v-if="item.status === 'paid'" style="color: rgb(40 151 21);">ชำระเงินแล้ว</div>
+            <!-- <div class="ticket-status" v-if="item.status === 'paid'" style="color: rgb(40 151 21);">ชำระเงินแล้ว</div> --> 
 
             <div class="button-container">
                   <!-- <button class="btn-confirm" @click="PaymentReceipt">หลักฐานการชำระเงิน</button> -->
                   <button class="btn-confirm" @click="confirmPayment(item.id)">อนุมัติ</button>
+                  <button class="btn-confirm" @click="rejectPayment(item.id)" style="background-color: #ff0000">ไม่อนุมัติ</button>
                   
                   
             </div>
@@ -127,6 +135,13 @@ methods: {
   async confirmPayment(idTicket){
     const id = idTicket; // ID ของที่นั่งที่ต้องการอัปเดต
     const newData = { statusApprove: 'approve'}; // ข้อมูลใหม่ที่ต้องการอัปเดต
+    await this.updateTicketStatus(id, newData);
+    await this.fetchTickets()
+
+  },
+  async rejectPayment(idTicket){
+    const id = idTicket; // ID ของที่นั่งที่ต้องการอัปเดต
+    const newData = { statusApprove: 'reject'}; // ข้อมูลใหม่ที่ต้องการอัปเดต
     await this.updateTicketStatus(id, newData);
     await this.fetchTickets()
 

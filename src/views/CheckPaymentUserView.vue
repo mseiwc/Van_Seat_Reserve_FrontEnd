@@ -45,8 +45,12 @@
             <div class="ticket-info">เส้นทาง : {{ item.add_route_id.startRoute_id.name }} - {{ item.add_route_id.endRoute_id.name }}</div>
             <div class="ticket-info">วันที่ : {{ item.add_route_id.date }}</div>
             <div class="ticket-info">เวลา : {{ item.add_route_id.time }}</div>
+
             <div class="ticket-info" v-if="item.statusApprove === 'pending'">สถานะการอนุมัติ: รอดำเนินการ</div>
-            <div class="ticket-info" v-if="item.statusApprove === 'approve'">สถานะการอนุมัติ: อนุมัติแล้ว</div>
+            <div class="ticket-info" v-if="item.statusApprove === 'approve'">สถานะการอนุมัติ: <span style="color: rgb(40 151 21);">อนุมัติแล้ว</span></div>
+            <div class="ticket-info" v-if="item.statusApprove === 'reject'">สถานะการอนุมัติ: <span style="color: #ff0000">ไม่อนุมัติ</span></div>
+            <div class="ticket-info" v-if="item.statusApprove === 'reject'">ติดต่อแจ้งปัญหา sasikan@gmail.com </div>
+
             <div class="ticket-status" v-if="item.status === 'unpaid'" style="color: #ff0000">ยังไม่ได้ชำระเงิน</div>
             <!-- <div class="ticket-status" v-if="item.status === 'pending'" style="color: #ff0000">รออนุมัติ</div> -->
             <div class="ticket-status" v-if="item.status === 'paid'" style="color: rgb(40 151 21);">ชำระเงินแล้ว</div>
